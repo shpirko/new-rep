@@ -19,7 +19,6 @@ public class Lecturer {
     }
 
 
-
     private DegreeLevel degreeLevel; // Field
     private String name; 
     private String id;
@@ -27,6 +26,14 @@ public class Lecturer {
     private int salary;
     private Department department;
     private Commitee[] commitees;
+
+    public Lecturer(String name, String id, String degreeName, Lecturer.DegreeLevel degreeLevel, int salary) {
+        this.degreeLevel = degreeLevel;
+        this.name = name;
+        this.id = id;
+        this.degreeName = degreeName;
+        this.salary = salary;
+    }
     
 
 }
