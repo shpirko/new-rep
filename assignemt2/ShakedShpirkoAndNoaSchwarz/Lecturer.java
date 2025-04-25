@@ -25,15 +25,54 @@ public class Lecturer {
     private String degreeName;
     private int salary;
     private Department department;
-    private Commitee[] commitees;
+    private Committee[] committees;
 
     public Lecturer(String name, String id, String degreeName, Lecturer.DegreeLevel degreeLevel, int salary) {
-        this.degreeLevel = degreeLevel;
         this.name = name;
         this.id = id;
         this.degreeName = degreeName;
+        this.degreeLevel = degreeLevel;
+        this.salary = salary;
+        this.department = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDegreeName() {
+        return degreeName;
+    }
+
+    public void setDegreeName(String degreeName) {
+        this.degreeName = degreeName;
+    }
+
+    public DegreeLevel getDegreeLevel() {
+        return degreeLevel;
+    }
+
+    public void setDegreeLevel(DegreeLevel degreeLevel) {
+        this.degreeLevel = degreeLevel;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
         this.salary = salary;
     }
-    
-
 }

@@ -10,6 +10,10 @@ public class Department {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     
 
 }
