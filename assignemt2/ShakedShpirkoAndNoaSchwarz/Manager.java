@@ -1,7 +1,6 @@
 package ShakedShpirkoAndNoaSchwarz;
 
 public class Manager {
-    private int userChosenNum;
     private String collegeName;
     private Lecturer[] lecturers; // Array of Lecturer objects
     private int numOfLecturers; // Number of lecturers in the college
@@ -25,7 +24,6 @@ public class Manager {
         lecturers[numOfLecturers] = lecturer;
         numOfLecturers++;
     }
-        
 
     public Lecturer[] copyArray(Lecturer[] arr, int currentSize, int newSize) {
         Lecturer[] newArr = new Lecturer[newSize];  // Create new array with newSize
@@ -35,35 +33,99 @@ public class Manager {
         return newArr;
     }
 
+
     public boolean isExistLecturer(String name) {
         for (int i = 0; i < numOfLecturers; i++) {
             if (lecturers[i].getName().equals(name))
                 return true;
         }
         return false;
-    } 
+    }
+        
 
 
-    private static boolean isExist(String name, Committee[] arr, int size) {
-        for (int i = 0; i < size; i++) {
-            if (arr[i].getName().equals(name))
+    public Lecturer getLecturerByName(String name) {
+        for (int i = 0; i < numOfLecturers; i++) {
+            if (lecturers[i].getName().equals(name))
+                return lecturers[i];
+        }
+        return null;
+    }
+
+
+     public void addDepartment(Department department) {
+        if (numOfDepartments == departments.length) 
+            departments = copyArray(departments, numOfDepartments ,numOfDepartments == 0 ? 2 : numOfDepartments * 2);
+        departments[numOfDepartments] = department;
+        numOfDepartments++;
+     }
+
+
+    public Department[] copyArray(Department[] arr, int currentSize, int newSize) {
+        Department[] newArr = new Department[newSize];  // Create new array with newSize
+        for (int i = 0; i < currentSize; i++) {  // Copy existing elements
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
+    
+
+    public boolean isExistDepartment(String name) {
+        for (int i = 0; i < numOfDepartments; i++) {
+            if (departments[i].getName().equals(name))
                 return true;
         }
         return false;
-    } 
+    }
 
 
-    private static boolean isExist(String name, Department[] arr, int size) {
-        for (int i = 0; i < size; i++) {
-            if (arr[i].getName().equals(name))
-                return true;
+
+    public Department getDepartmentByName(String name) {
+        for (int i = 0; i < numOfDepartments; i++) {
+            if (departments[i].getName().equals(name))
+                return departments[i];
         }
-        return false;
-    } 
+        return null;
+    }   
 
 
+
+    public void addCommittee(Committee committee) {
+        if (numOfCommittees == committees.length) 
+            committees = copyArray(committees, numOfCommittees ,numOfCommittees == 0 ? 2 : numOfCommittees * 2);
+        committees[numOfCommittees] = committee;
+        numOfCommittees++;
+    }
 
 
     
+    public Committee[] copyArray(Committee[] arr, int currentSize, int newSize) {
+        Committee[] newArr = new Committee[newSize];  // Create new array with newSize
+        for (int i = 0; i < currentSize; i++) {  // Copy existing elements
+            newArr[i] = arr[i];
+        }
+        return newArr;
+    }
 
+    public boolean isExistCommittee(String name) {
+        for (int i = 0; i < numOfCommittees; i++) {
+            if (committees[i].getName().equals(name))
+                return true;
+        }
+        return false;
+    }
+
+    public Committee getCommitteeByName(String name) {
+        for (int i = 0; i < numOfCommittees; i++) {
+            if (committees[i].getName().equals(name))
+                return committees[i];
+        }
+        return null;    
+
+
+    
+    }
+
+
+    
 }

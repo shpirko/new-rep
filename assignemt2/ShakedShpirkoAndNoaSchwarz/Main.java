@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 import ShakedShpirkoAndNoaSchwarz.Lecturer.DegreeLevel;
 public class Main {
-    private static final String[] MENU = {
+    private final String[] MENU = {
         "Exit Program",
         "Add Lecturer",
         "Add Committee",
@@ -18,9 +18,9 @@ public class Main {
         // Add more options
     };
     
-    private static Scanner s;
-    private static int userChosenNum;
-    Manager manager;
+    private Scanner s;
+    private int userChosenNum;
+    private Manager manager;
 
 
     private int showMenu(Scanner s) {
@@ -30,11 +30,13 @@ public class Main {
         }
         System.out.println("Please select an action : ");
         return s.nextInt();
+        
     }
 
     private void run() {
         do {
             userChosenNum = showMenu(s);
+            s.nextLine(); // Consume the newline character left by nextInt()
             switch (userChosenNum) {
                 case 0 -> System.out.println("Exiting program");
                 case 1 -> addLecturer();
@@ -53,14 +55,13 @@ public class Main {
     }
 
 
-    public void main(String[] args) {
-        // Shaked Shpirko and Noa Schwarz
-        // 315142372 and 212840516
-        s = new Scanner(System.in);
+    public static void main(String[] args) {
+        Main program = new Main();  // Create instance
+        program.s = new Scanner(System.in);
         System.out.println("Welcome to the system! please enter a college name: ");
-        Manager manager = new Manager(s.nextLine());
-        run(); // Start the program
-        s.close(); // Close the scanner to prevent resource leaks
+        program.manager = new Manager(program.s.nextLine());
+        program.run();  // Call instance method
+        program.s.close();
         
     }
 
@@ -71,8 +72,11 @@ public class Main {
             System.out.println("\nLecturer name already exists in the system");
             System.out.println("press 1 to change the Lecturer name or 2 to return to menu");;
             if (s.nextInt() == 1) {
+                s.nextLine(); 
                 addLecturer ();
+                
             }
+            
         }
         else{
             System.out.println("Enter lecturer ID: ");
@@ -100,13 +104,78 @@ public class Main {
         
     }
 
+
+    private void addDepartment() {
+        System.out.println("Enter department name: ");
+        String name = s.nextLine();
+        if(manager.isExistDepartment(name)){
+            System.out.println("\nDepartment name already exists in the system");
+            System.out.println("press 1 to change the Department name or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addDepartment ();
+                
+            }
+            
+        }
+        else{
+            Department newDepartment = new Department(name);
+            manager.addDepartment(newDepartment);
+            System.out.println("Department added successfully!");
+        }
+        
+    }
+
+
+
     private void addCommittee(){
-
+        System.out.println("Enter committee name: ");
+        String name = s.nextLine();
+        if(manager.isExistCommittee(name)){
+            System.out.println("\nCommittee name already exists in the system");
+            System.out.println("press 1 to change the Committee name or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addCommittee ();
+                
+            }
+            
+        }
+        else{
+            System.out.println("Enter chairman name: ");
+            String chairName = s.nextLine();
+            if(!manager.isExistLecturer(chairName))
+            {
+                System.out.println("Lecturrer does not exist in the system, please add him first");
+                System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
+                if (s.nextInt() == 1) {
+                    s.nextLine(); 
+                    addLecturer ();
+                    
+                }
+            }
+            else{
+                Lecturer chair = manager.getLecturerByName(chairName);
+                if(chair.getDegreeLevel() == DegreeLevel.BACHELOR || chair.getDegreeLevel() == DegreeLevel.MASTER){
+                    System.out.println("Chairman must be at least a PhD degree holder");
+                    System.out.println("press 1 to add Committee or 2 to return to menu");  
+                    if (s.nextInt() == 1) {
+                        s.nextLine();
+                        addCommittee();
+                        
+                    
+            }
+                }
+                else{
+                    Committee newCommittee = new Committee(name,chair);
+                    manager.addCommittee(newCommittee);
+                    System.out.println("Committee added successfully!");
+                }
+            }
+        }
     }
 
-    private void addDepartment(){
-
-    }
+    
 
 
 }
