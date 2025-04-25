@@ -20,7 +20,13 @@ public class Manager {
         
     }
 
-    
+    private static boolean isExsit(Object name, Object[] arr, int size) {
+        for (int i = 0; i < size; i++) {
+            if (arr[i].equals(name))
+                return true;
+        }
+        return false;
+    } 
 
     
 

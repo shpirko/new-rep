@@ -1,5 +1,7 @@
 package ShakedShpirkoAndNoaSchwarz;
 import java.util.Scanner;
+
+import ShakedShpirkoAndNoaSchwarz.Lecturer.DegreeLevel;
 /*is it working? */
 public class Main {
     private static final String[] MENU = {
@@ -53,6 +55,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+        // Shaked Shpirko and Noa Schwarz
+        // 315142372 and 212840516
         s = new Scanner(System.in);
         System.out.println("Welcome to the system! please enter a college name: ");
         Manager manager = new Manager(s.nextLine());
@@ -66,8 +70,24 @@ public class Main {
         String name = s.nextLine();
         System.out.println("Enter lecturer ID: ");
         String id = s.nextLine();
-
+        System.out.println("Enter degree name");
+        String degreename = s.nextLine();
+        System.out.println("Choose degree level by number: 1. Bachelor 2. Master 3. PhD 4. Professor");
+        int degreeLevel = s.nextInt();
+        s.nextLine();
+        DegreeLevel elevel = null;
+        switch (degreeLevel) {
+            case 1 -> elevel = DegreeLevel.BACHELOR;
+            case 2 -> elevel = DegreeLevel.MASTER;
+            case 3 -> elevel = DegreeLevel.PHD;
+            case 4 -> elevel = DegreeLevel.PROFESSOR;
+            default -> System.out.println("Invalid number");
+        }
+        System.out.println("Enter salary");
+        int salary = s.nextInt();
+        s.nextLine();
         
     }
+
 
 }

@@ -6,5 +6,10 @@ public class Department {
     Lecturer[] lecturers; // Array of Lecturer objects
     private int numOfLecturers; // Number of lecturers in the department
 
+    public Department(String name) {
+        this.name = name;
+    }
+
+    
 
 }
