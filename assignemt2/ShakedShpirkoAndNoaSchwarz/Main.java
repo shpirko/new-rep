@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 import ShakedShpirkoAndNoaSchwarz.Lecturer.DegreeLevel;
 public class Main {
-    private final String[] MENU = {
+    private static final String[] MENU = {
         "Exit Program",
         "Add Lecturer",
         "Add Committee",
@@ -18,12 +18,12 @@ public class Main {
         // Add more options
     };
     
-    private Scanner s;
-    private int userChosenNum;
-    private Manager manager;
+    private static Scanner s;
+    private static int userChosenNum;
+    private static Manager manager;
 
 
-    private int showMenu(Scanner s) {
+    private static int showMenu(Scanner s) {
         System.out.println("\n====== Menu =======");
         for (int i = 0; i < MENU.length; i++) {
             System.out.println(i + ". " + MENU[i]);
@@ -33,7 +33,7 @@ public class Main {
         
     }
 
-    private void run() {
+    private static void run() {
         do {
             userChosenNum = showMenu(s);
             s.nextLine(); // Consume the newline character left by nextInt()
@@ -56,16 +56,23 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Main program = new Main();  // Create instance
+        /*Main program = new Main();  // Create instance
         program.s = new Scanner(System.in);
         System.out.println("Welcome to the system! please enter a college name: ");
         program.manager = new Manager(program.s.nextLine());
         program.run();  // Call instance method
-        program.s.close();
+        program.s.close(); */
+
+
+        s = new Scanner(System.in);
+        System.out.println("Welcome to the system! please enter a college name: ");
+        Main.manager = new Manager(s.nextLine());
+        run();
+
         
     }
 
-    private void addLecturer() {
+    private static void addLecturer() {
         System.out.println("Enter lecturer name: ");
         String name = s.nextLine();
         if(manager.isExistLecturer(name)){
@@ -105,7 +112,7 @@ public class Main {
     }
 
 
-    private void addDepartment() {
+    private static void addDepartment() {
         System.out.println("Enter department name: ");
         String name = s.nextLine();
         if(manager.isExistDepartment(name)){
@@ -128,7 +135,7 @@ public class Main {
 
 
 
-    private void addCommittee(){
+    private static void addCommittee(){
         System.out.println("Enter committee name: ");
         String name = s.nextLine();
         if(manager.isExistCommittee(name)){
