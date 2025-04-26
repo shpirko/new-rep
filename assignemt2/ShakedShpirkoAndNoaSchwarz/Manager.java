@@ -9,6 +9,7 @@ public class Manager {
     private Committee[] committees; // Array of Commitee objects
     private int numOfCommittees; // Number of committees in the college
 
+
     
 
     public Manager(String collegeName) {
@@ -121,11 +122,55 @@ public class Manager {
                 return committees[i];
         }
         return null;    
-
-
     
     }
 
+    public int calcAvg() {
+        int sum = 0;
+        if (numOfLecturers == 0) {
+            System.out.println("No lecturers in the system yet.");
+            return 0;
+        }
+        for (int i = 0; i < numOfLecturers; i++) {
+            sum += lecturers[i].getSalary();
+        }
+        return sum / numOfLecturers;
+    }
 
+    public int calcAvgDep(String depName) {
+        int sum = 0;
+        int numOfLecturersInDep = 0;
+        for (int i = 0; i < numOfLecturers; i++) {
+            if(lecturers[i].getDepartment() != null && lecturers[i].getDepartment().getName().equals(depName)){
+                sum += lecturers[i].getSalary();
+                numOfLecturersInDep++;
+            }
+        }
+        if(numOfLecturersInDep == 0){
+            System.out.println("No lecturers in departmnet");
+            return 0;
+        }
+        return sum / numOfLecturersInDep;
+    }
+
+    public void lucturersInfo(){
+        for (int i = 0; i < numOfLecturers; i++){
+            System.out.println("Lucturer: " + lecturers[i].getName());
+            System.out.println("ID: " + lecturers[i].getId());
+            System.out.println("Degree name: " + lecturers[i].getDegreeName());
+            System.out.println("Degree level: " + lecturers[i].getDegreeLevel());
+            System.out.println("Salary: " + lecturers[i].getSalary());
+            System.out.println("Departmnet: " + lecturers[i].getDepartment());
+            System.out.println("Committiees: " + lecturers[i].getCommittees()+ "\n");
+        }
+    }
+
+    public void committeesInfo(){
+        for (int i = 0; i < numOfCommittees; i++){
+           System.out.println("Committee name: " + committees[i].getName()); 
+           System.out.println("Chairman name: " + committees[i].getChairName());
+           System.out.println("Members: " + committees[i].getMembers());
+        }
+    }
     
 }

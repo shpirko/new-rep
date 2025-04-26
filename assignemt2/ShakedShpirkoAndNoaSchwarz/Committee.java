@@ -19,6 +19,12 @@ public class Committee {
         return chair.getName();
     }
 
+    public Lecturer[] getMembers() {
+        return members;
+    }
+
+    
+
     
 
 

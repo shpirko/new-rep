@@ -15,6 +15,7 @@ public class Main {
         "Show Average Salary of All Lecturers",
         "Show Average Salary of Lecturers in Department",
         "Show All Lecturers Info",
+        "Show All Committees Info",
         // Add more options
     };
     
@@ -42,14 +43,15 @@ public class Main {
                 case 1 -> addLecturer();
                 case 2 -> addCommittee();
                 case 3 -> addDepartment();
-                /*case 4 -> updateChairOfCommittee();
+                case 4 -> updateChairOfCommittee();
                 case 5 -> removeLecturerFromCommittee();
                 case 6 -> asignLecturerToCommittee();
                 case 7 -> asignLecturerToDepartment();
                 case 8 -> showAverageSalaryOfAllLecturers();
                 case 9 -> showAverageSalaryOfLecturersInDepartment();
                 case 10 -> showAllLecturersInfo();
-*/                default -> System.out.println("Incorrect input, please try again");
+                case 11 -> showAllCommitteesInfo();
+                default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
     }
@@ -68,6 +70,7 @@ public class Main {
         System.out.println("Welcome to the system! please enter a college name: ");
         Main.manager = new Manager(s.nextLine());
         run();
+        s.close();
 
         
     }
@@ -99,14 +102,16 @@ public class Main {
                 case 2 -> elevel = DegreeLevel.MASTER;
                 case 3 -> elevel = DegreeLevel.PHD;
                 case 4 -> elevel = DegreeLevel.PROFESSOR;
-                default -> System.out.println("Invalid number");
+                default -> {System.out.println("Invalid number"); 
+                return;}
+
             }
             System.out.println("Enter salary");
             int salary = s.nextInt();
             s.nextLine();
-
             Lecturer newLecturer = new Lecturer(name, id, degreename, elevel, salary);
             manager.addLecturer(newLecturer);
+            System.out.println("Lucturer added successfully!");
         }
         
     }
@@ -182,7 +187,55 @@ public class Main {
         }
     }
 
-    
+    private static void updateChairOfCommittee(){
+
+    }
+    private static void removeLecturerFromCommittee(){
+
+    }
+
+    private static void asignLecturerToCommittee(){
+        
+    }
+
+    private static void asignLecturerToDepartment(){
+        
+    }
+        
+
+    private static void showAverageSalaryOfAllLecturers(){
+        int avg = manager.calcAvg();
+        System.out.println("The average salary of all lecturers is: " + avg);
+    }
+
+    private static void showAverageSalaryOfLecturersInDepartment(){
+        System.out.println("Which departmnet average would you like to see?");
+        String depName = s.nextLine();
+        if(!manager.isExistDepartment(depName)){
+            System.out.println("\nThe department does not exist in the system");
+            System.out.println("press 1 to create a Department or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addDepartment ();
+                
+            }    
+        }
+        else{
+            int avg = manager.calcAvgDep(depName); 
+            System.out.println("The average salary for " + depName + " is: " + avg);
+        }
+    }
+
+    private static void showAllLecturersInfo(){
+        System.out.println("Presenting all lecturers info: ");
+        manager.lucturersInfo();
+    }
+
+    private static void showAllCommitteesInfo(){
+        System.out.println("Presenting all committies info: ");
+        manager.committeesInfo();
+
+    }
 
 
 }

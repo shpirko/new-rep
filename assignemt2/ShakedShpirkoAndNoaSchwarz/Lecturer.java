@@ -75,4 +75,22 @@ public class Lecturer {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Committee[] getCommittees() {
+        return committees;
+    }
+
+    public void setCommittees(Committee[] committees) {
+        this.committees = committees;
+    }
+
+    
 }
