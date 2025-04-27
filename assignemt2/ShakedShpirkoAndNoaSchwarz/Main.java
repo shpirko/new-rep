@@ -91,7 +91,7 @@ public class Main {
         else{
             System.out.println("Enter lecturer ID: ");
             String id = s.nextLine();
-            System.out.println("Enter degree name");
+            System.out.println("Enter degree name: ");
             String degreename = s.nextLine();
             System.out.println("Choose degree level by number: 1. Bachelor 2. Master 3. PhD 4. Professor");
             int degreeLevel = s.nextInt();
@@ -106,7 +106,7 @@ public class Main {
                 return;}
 
             }
-            System.out.println("Enter salary");
+            System.out.println("Enter salary: ");
             int salary = s.nextInt();
             s.nextLine();
             Lecturer newLecturer = new Lecturer(name, id, degreename, elevel, salary);
@@ -214,7 +214,7 @@ public class Main {
                 Lecturer chair = manager.getLecturerByName(chairName);
                 if(manager.isLecturrerInCommittee(chair, commmittee)){
                     System.out.println("New chairman can't be in the committee");
-                    System.out.println("Press 1 to asign a new chairman to committee or 2 to return to menu");  
+                    System.out.println("Press 1 to assign a new chairman to committee or 2 to return to menu");  
                     if (s.nextInt() == 1) {
                         s.nextLine();
                         updateChairOfCommittee();
@@ -224,7 +224,7 @@ public class Main {
                 else{
                     if(chair.getDegreeLevel() == DegreeLevel.BACHELOR || chair.getDegreeLevel() == DegreeLevel.MASTER){
                             System.out.println("Chairman must be at least a PhD degree holder");
-                            System.out.println("Press 1 to asign a new chairman to cimmittee or 2 to return to menu");  
+                            System.out.println("Press 1 to asign a diffrent chairman to the committee or 2 to return to menu");  
                             if (s.nextInt() == 1) {
                                 s.nextLine();
                                 updateChairOfCommittee();
@@ -273,7 +273,7 @@ public class Main {
                 Lecturer lect = manager.getLecturerByName(lectName);
                 if (!manager.isLecturrerInCommittee(lect, commmittee)){
                     System.out.println("Lecturer is not in the committee");
-                    System.out.println("Press 1 to remove a new lecturer from cimmittee or 2 to return to menu");  
+                    System.out.println("Press 1 to remove a diffrent lecturer from the committee or 2 to return to menu");  
                     if (s.nextInt() == 1) {
                         s.nextLine();
                         removeLecturerFromCommittee();
@@ -323,7 +323,7 @@ public class Main {
                 Lecturer lect = manager.getLecturerByName(lectName);
                 if (commmittee.getChairName() != null && commmittee.getChairName().equals(lectName)){
                     System.out.println("Chairman can't be in the committee");
-                    System.out.println("Press 1 to asign a new lecturer to cimmittee or 2 to return to menu");
+                    System.out.println("Press 1 to asign a diffrent lecturer to the committee or 2 to return to menu");
                     if (s.nextInt() == 1) {
                         s.nextLine();
                         asignLecturerToCommittee();
@@ -334,7 +334,7 @@ public class Main {
                 else{ 
                     if(manager.isLecturrerInCommittee(lect, commmittee)){
                         System.out.println("Lecturer is already in the committee");
-                        System.out.println("Press 1 to asign a new lecturer to cimmittee or 2 to return to menu");  
+                        System.out.println("Press 1 to asign a diffrent lecturer to the committee or 2 to return to menu");  
                         if (s.nextInt() == 1) {
                             s.nextLine();
                             asignLecturerToCommittee();
@@ -382,7 +382,7 @@ public class Main {
                 if (lect.getDepartment() != null){
                     if(lect.getDepartment().getName().equals(depName)){
                         System.out.println("Lecturer is already in this department");
-                        System.out.println("Press 1 to asign a new lecturer to department or 2 to return to menu");  
+                        System.out.println("Press 1 to asign a diffrent lecturer to the department or 2 to return to menu");  
                         if (s.nextInt() == 1) {
                             s.nextLine();
                             asignLecturerToDepartment();

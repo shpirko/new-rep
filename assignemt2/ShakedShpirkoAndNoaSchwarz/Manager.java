@@ -155,7 +155,7 @@ public class Manager {
             System.out.println("Degree name: " + lecturers[i].getDegreeName());
             System.out.println("Degree level: " + lecturers[i].getDegreeLevel());
             System.out.println("Salary: " + lecturers[i].getSalary());
-            System.out.println("Departmnet: " + lecturers[i].getDepartment());
+            System.out.println("Departmnet: " + lecturers[i].getDepartment().getName());
             System.out.println("Committiees: " + lecturers[i].getCommittees()+ "\n");
         }
     }
@@ -196,7 +196,7 @@ public class Manager {
         Department department = getDepartmentByName(depName);
         Lecturer[] lecturers = department.getLecturers();
         for (int i = 0; i < department.getNumOfLecturers(); i++) { 
-                sum += lecturers[i].getSalary();
+            sum += lecturers[i].getSalary();
             
         }
         if (sum == 0)
