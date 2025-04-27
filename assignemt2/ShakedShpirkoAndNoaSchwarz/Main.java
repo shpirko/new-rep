@@ -16,6 +16,7 @@ public class Main {
         "Show Average Salary of Lecturers in Department",
         "Show All Lecturers Info",
         "Show All Committees Info",
+        "testing",
         // Add more options
     };
     
@@ -51,6 +52,7 @@ public class Main {
                 case 9 -> showAverageSalaryOfLecturersInDepartment();
                 case 10 -> showAllLecturersInfo();
                 case 11 -> showAllCommitteesInfo();
+                case 12 -> testing();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -61,6 +63,16 @@ public class Main {
         Main.manager = new Manager(s.nextLine());
         run();
         s.close();
+    }
+
+    private static void testing(){
+        Lecturer newLecturer = new Lecturer("stav", "1", "degreename", DegreeLevel.BACHELOR, 109);
+            manager.addLecturer(newLecturer);
+        Lecturer newLecturer2 = new Lecturer("shaked", "2", "degreename", DegreeLevel.MASTER, 115);
+            manager.addLecturer(newLecturer2);
+        Lecturer newLecturer3 = new Lecturer("noa", "3", "degreename", DegreeLevel.PROFESSOR, 154);
+            manager.addLecturer(newLecturer3);
+
     }
 
     private static void addLecturer() {
@@ -359,7 +371,7 @@ public class Main {
     }
         
     private static void showAverageSalaryOfAllLecturers(){
-        int avg = manager.calcAvgSalary();
+        float avg = manager.calcAvgSalary();
         System.out.println("The average salary of all lecturers is: " + avg);
     }
 
@@ -376,7 +388,7 @@ public class Main {
             }    
         }
         else{
-            int avg = manager.calcAvgDep(depName); 
+            float avg = manager.calcAvgDep(depName); 
             System.out.println("The average salary for " + depName + " is: " + avg);
         }
     }

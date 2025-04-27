@@ -71,6 +71,9 @@ public class Manager {
  
     public void asignLecturerToDepartment (Lecturer lecturer, Department department) {
         lecturer.setDepartment(department);
+        if(department.getLecturers() == null){
+            department.setLecturers(new Lecturer[0]);
+        }
         if (department.getNumOfLecturers() == department.getLecturers().length) 
             department.setLecturers(copyArray(department.getLecturers(), department.getNumOfLecturers() ,department.getNumOfLecturers() == 0 ? 2 : department.getNumOfLecturers() * 2));
         department.getLecturers()[department.getNumOfLecturers()] = lecturer;
@@ -78,7 +81,10 @@ public class Manager {
     }
 
     public void asignLecturerToCommittee(Lecturer lecturer, Committee committee) {
-        if (lecturer.getNumOfCommittees() == lecturer.getCommittees().length) 
+    if(lecturer.getCommittees() == null){
+        lecturer.setCommittees(new Committee[0]);
+    }
+    if (lecturer.getNumOfCommittees() == lecturer.getCommittees().length) 
             lecturer.setCommittees(copyArray(lecturer.getCommittees(), lecturer.getNumOfCommittees() ,lecturer.getNumOfCommittees() == 0 ? 2 : lecturer.getNumOfCommittees() * 2));
         lecturer.getCommittees()[lecturer.getNumOfCommittees()] = committee;
         lecturer.setNumOfCommittees(lecturer.getNumOfCommittees() + 1);
@@ -115,8 +121,8 @@ public class Manager {
         return null;
     }
 
-    public int calcAvgSalary() {
-        int sum = 0;
+    public float calcAvgSalary() {
+        float sum = 0;
         if (numOfLecturers == 0) {
             System.out.println("No lecturers in the system yet.");
             return 0;
@@ -170,8 +176,8 @@ public class Manager {
         return null;
     }   
 
-    public int calcAvgDep(String depName) {
-        int sum = 0;
+    public float calcAvgDep(String depName) {
+        float sum = 0;
         Department department = getDepartmentByName(depName);
         Lecturer[] lecturers = department.getLecturers();
         for (int i = 0; i < department.getNumOfLecturers(); i++) { 
