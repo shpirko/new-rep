@@ -35,4 +35,8 @@ public class Committee {
         this.numOfMembers = numOfMembers;
     }
 
+    public void setMembers(Lecturer[] members) {
+        this.members = members;
+    }
+
 }

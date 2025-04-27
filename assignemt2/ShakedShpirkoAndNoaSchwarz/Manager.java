@@ -53,20 +53,24 @@ public class Manager {
         }
     }
     
+    public void updateChairOfCommittee(Committee commiitte, Lecturer newChair) {
+        commiitte.setChair(newChair);
+    }
+    
     public void removeLecturerFromDepartment(Lecturer lecturer, Department department) {
-        if (department != null) {
-            for (int i = 0; i < department.getNumOfLecturers(); i++) {
-                if (department.getLecturers()[i].getName().equals(lecturer.getName())) {
-                    // Shift elements to the left to remove the lecturer
-                    for (int j = i; j < department.getNumOfLecturers() - 1; j++) {
-                        department.getLecturers()[j] = department.getLecturers()[j + 1];
-                    }
-                    department.getLecturers()[department.getNumOfLecturers() - 1] = null; // Clear the last element
-                    department.setNumOfMembers(department.getNumOfLecturers() - 1); // Decrease the number of lecturers in the department
-                    break;
+        
+        for (int i = 0; i < department.getNumOfLecturers(); i++) {
+            if (department.getLecturers()[i].getName().equals(lecturer.getName())) {
+                // Shift elements to the left to remove the lecturer
+                for (int j = i; j < department.getNumOfLecturers() - 1; j++) {
+                    department.getLecturers()[j] = department.getLecturers()[j + 1];
                 }
+                department.getLecturers()[department.getNumOfLecturers() - 1] = null; // Clear the last element
+                department.setNumOfMembers(department.getNumOfLecturers() - 1); // Decrease the number of lecturers in the department
+                break;
             }
         }
+        
     }
  
     public void asignLecturerToDepartment (Lecturer lecturer, Department department) {
@@ -81,13 +85,24 @@ public class Manager {
     }
 
     public void asignLecturerToCommittee(Lecturer lecturer, Committee committee) {
-    if(lecturer.getCommittees() == null){
-        lecturer.setCommittees(new Committee[0]);
-    }
-    if (lecturer.getNumOfCommittees() == lecturer.getCommittees().length) 
-            lecturer.setCommittees(copyArray(lecturer.getCommittees(), lecturer.getNumOfCommittees() ,lecturer.getNumOfCommittees() == 0 ? 2 : lecturer.getNumOfCommittees() * 2));
+        if(lecturer.getCommittees() == null)
+            lecturer.setCommittees(new Committee[0]);
+
+        if (lecturer.getNumOfCommittees() == lecturer.getCommittees().length) 
+                lecturer.setCommittees(copyArray(lecturer.getCommittees(), lecturer.getNumOfCommittees() ,lecturer.getNumOfCommittees() == 0 ? 2 : lecturer.getNumOfCommittees() * 2));
+
         lecturer.getCommittees()[lecturer.getNumOfCommittees()] = committee;
         lecturer.setNumOfCommittees(lecturer.getNumOfCommittees() + 1);
+
+        if (committee.getMembers() == null)
+            committee.setMembers(new Lecturer[0]);
+
+        if (committee.getNumOfMembers() == committee.getMembers().length) 
+            committee.setMembers(copyArray(committee.getMembers(), committee.getNumOfMembers() ,committee.getNumOfMembers() == 0 ? 2 : committee.getNumOfMembers() * 2));
+
+        committee.getMembers()[committee.getNumOfMembers()] = lecturer;
+        committee.setNumOfMembers(committee.getNumOfMembers() + 1);    
+
     }
    
     public void addLecturer(Lecturer lecturer) {
@@ -230,8 +245,6 @@ public class Manager {
         }
     }
 
-    public void updateChairOfCommittee(Committee commiitte, Lecturer newChair) {
-        commiitte.setChair(newChair);
-    }
+    
 
 }

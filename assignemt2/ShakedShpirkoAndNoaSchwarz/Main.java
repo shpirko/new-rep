@@ -212,24 +212,36 @@ public class Main {
             }
             else{
                 Lecturer chair = manager.getLecturerByName(chairName);
-                if(chair.getDegreeLevel() == DegreeLevel.BACHELOR || chair.getDegreeLevel() == DegreeLevel.MASTER){
-                    System.out.println("Chairman must be at least a PhD degree holder");
-                    System.out.println("press 1 to add Committee or 2 to return to menu");  
+                if(manager.isLecturrerInCommittee(chair, commmittee)){
+                    System.out.println("New chairman can't be in the committee");
+                    System.out.println("Press 1 to asign a new chairman to committee or 2 to return to menu");  
                     if (s.nextInt() == 1) {
                         s.nextLine();
-                        addCommittee();
+                        updateChairOfCommittee();
                         
-                    
-            }
+                    }   
                 }
                 else{
-                    manager.updateChairOfCommittee(commmittee, chair);
-                    System.out.println("Chairman updated successfully!");
+                    if(chair.getDegreeLevel() == DegreeLevel.BACHELOR || chair.getDegreeLevel() == DegreeLevel.MASTER){
+                            System.out.println("Chairman must be at least a PhD degree holder");
+                            System.out.println("Press 1 to asign a new chairman to cimmittee or 2 to return to menu");  
+                            if (s.nextInt() == 1) {
+                                s.nextLine();
+                                updateChairOfCommittee();
+                            
+                            }  
+                        
+                        }
+                        else{
+                            manager.updateChairOfCommittee(commmittee, chair);
+                            System.out.println("Chairman updated successfully!");
+                        }
+
+                    
                 }
             }
         }
-
-    }
+    } 
 
     private static void removeLecturerFromCommittee(){
         System.out.println("Enter committee name: ");
@@ -275,10 +287,10 @@ public class Main {
             }
         }
 
-
     }
 
-    private static void asignLecturerToCommittee(){
+    private static void asignLecturerToCommittee()
+    {
         System.out.println("Enter committee name: ");
         String comName = s.nextLine();
         if(!manager.isExistCommittee(comName)){
@@ -290,7 +302,8 @@ public class Main {
                 
             }    
         }
-        else{
+        else
+        {
             Committee commmittee = manager.getCommitteeByName(comName);
             System.out.println("Enter lecturer name: ");
             String lectName = s.nextLine();
@@ -304,25 +317,40 @@ public class Main {
                     
                 }
             }
-            else{
+            else
+            {
+                
                 Lecturer lect = manager.getLecturerByName(lectName);
-                if (manager.isLecturrerInCommittee(lect, commmittee)){
-                    System.out.println("Lecturer is already in the committee");
-                    System.out.println("Press 1 to asign a new lecturer to cimmittee or 2 to return to menu");  
+                if (commmittee.getChairName() != null && commmittee.getChairName().equals(lectName)){
+                    System.out.println("Chairman can't be in the committee");
+                    System.out.println("Press 1 to asign a new lecturer to cimmittee or 2 to return to menu");
                     if (s.nextInt() == 1) {
                         s.nextLine();
                         asignLecturerToCommittee();
-            }   
+                        
+                    }
+                   
                 }
-                else{
-                    manager.asignLecturerToCommittee(lect, commmittee);
-                    System.out.println("Lecturer added to committee successfully!");
-                }
+                else{ 
+                    if(manager.isLecturrerInCommittee(lect, commmittee)){
+                        System.out.println("Lecturer is already in the committee");
+                        System.out.println("Press 1 to asign a new lecturer to cimmittee or 2 to return to menu");  
+                        if (s.nextInt() == 1) {
+                            s.nextLine();
+                            asignLecturerToCommittee();
+                        
+                        }   
+                   }
+                    else{
+                        manager.asignLecturerToCommittee(lect, commmittee);
+                        System.out.println("Lecturer added to committee successfully!");
+                    }   
+                }     
             }
+                
         }
-        
     }
-
+        
     private static void asignLecturerToDepartment(){
         System.out.println("Enter department name: ");
         String depName = s.nextLine();
@@ -351,20 +379,27 @@ public class Main {
             }
             else{
                 Lecturer lect = manager.getLecturerByName(lectName);
-                if (lect.getDepartment() != null && lect.getDepartment().getName().equals(depName)){
-                    System.out.println("Lecturer is already in the department");
-                    System.out.println("Press 1 to asign a new lecturer to Department or 2 to return to menu");  
-                    if (s.nextInt() == 1) {
-                        s.nextLine();
-                        asignLecturerToDepartment();
-                        
-                    }   
+                if (lect.getDepartment() != null){
+                    if(lect.getDepartment().getName().equals(depName)){
+                        System.out.println("Lecturer is already in this department");
+                        System.out.println("Press 1 to asign a new lecturer to department or 2 to return to menu");  
+                        if (s.nextInt() == 1) {
+                            s.nextLine();
+                            asignLecturerToDepartment();
+                            
+                        }   
+                    }
+                    else{
+                        manager.removeLecturerFromDepartment(lect, lect.getDepartment());
+                    
+                    }
+                    
                 }
-                else{
-                    manager.removeLecturerFromDepartment(lect, lect.getDepartment());
-                    manager.asignLecturerToDepartment(lect, department);
-                    System.out.println("Lecturer added to department successfully!");
-                }
+                
+
+                manager.asignLecturerToDepartment(lect, department);
+                System.out.println("Lecturer added to department successfully!");
+                
             }
         }
         
