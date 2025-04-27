@@ -19,13 +19,20 @@ public class Committee {
         return chair.getName();
     }
 
+    public int getNumOfMembers() {
+        return numOfMembers;
+    }
+
     public Lecturer[] getMembers() {
         return members;
     }
 
-    
+    public void setChair(Lecturer chair) {
+        this.chair = chair;
+    }
 
-    
-
+    public void setNumOfMembers(int numOfMembers) {
+        this.numOfMembers = numOfMembers;
+    }
 
 }

@@ -14,6 +14,23 @@ public class Department {
         return name;
     }
 
+    public int getNumOfLecturers() {
+        return numOfLecturers;
+    }
+
+    public void setNumOfMembers(int numOfLecturers) {
+        this.numOfLecturers = numOfLecturers;
+    }
+
+    public Lecturer[] getLecturers() {
+        return lecturers;
+    }
+
+    public void setLecturers(Lecturer[] lecturers) {
+        this.lecturers = lecturers;
+    }
+
+
     
 
 }

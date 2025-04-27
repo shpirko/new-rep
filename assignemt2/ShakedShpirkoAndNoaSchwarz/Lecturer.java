@@ -25,6 +25,7 @@ public class Lecturer {
     private String degreeName;
     private int salary;
     private Department department;
+    private int numOfCommittees; // Number of committees the lecturer is in
     private Committee[] committees;
 
     public Lecturer(String name, String id, String degreeName, Lecturer.DegreeLevel degreeLevel, int salary) {
@@ -84,6 +85,14 @@ public class Lecturer {
         this.department = department;
     }
 
+    public int getNumOfCommittees() {
+        return numOfCommittees;
+    }
+
+    public void setNumOfCommittees(int numOfCommittees) {
+        this.numOfCommittees = numOfCommittees;
+    }
+
     public Committee[] getCommittees() {
         return committees;
     }
@@ -91,6 +100,9 @@ public class Lecturer {
     public void setCommittees(Committee[] committees) {
         this.committees = committees;
     }
+
+    
+    
 
     
 }
