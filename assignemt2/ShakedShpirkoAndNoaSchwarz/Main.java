@@ -55,8 +55,6 @@ public class Main {
             }
         } while (userChosenNum != 0);
     }
-
-
     public static void main(String[] args) {
         s = new Scanner(System.in);
         System.out.println("Welcome to the system! please enter a college name: ");
@@ -86,7 +84,7 @@ public class Main {
             System.out.println("Choose degree level by number: 1. Bachelor 2. Master 3. PhD 4. Professor");
             int degreeLevel = s.nextInt();
             s.nextLine();
-            DegreeLevel elevel = null;
+            DegreeLevel elevel;
             switch (degreeLevel) {
                 case 1 -> elevel = DegreeLevel.BACHELOR;
                 case 2 -> elevel = DegreeLevel.MASTER;
@@ -105,7 +103,6 @@ public class Main {
         }
         
     }
-
 
     private static void addDepartment() {
         System.out.println("Enter department name: ");
@@ -127,8 +124,6 @@ public class Main {
         }
         
     }
-
-
 
     private static void addCommittee(){
         System.out.println("Enter committee name: ");
@@ -223,6 +218,7 @@ public class Main {
         }
 
     }
+
     private static void removeLecturerFromCommittee(){
         System.out.println("Enter committee name: ");
         String comName = s.nextLine();
@@ -362,7 +358,6 @@ public class Main {
         
     }
         
-
     private static void showAverageSalaryOfAllLecturers(){
         int avg = manager.calcAvgSalary();
         System.out.println("The average salary of all lecturers is: " + avg);

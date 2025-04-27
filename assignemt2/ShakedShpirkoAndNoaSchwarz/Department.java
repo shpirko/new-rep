@@ -30,7 +30,4 @@ public class Department {
         this.lecturers = lecturers;
     }
 
-
-    
-
 }

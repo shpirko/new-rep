@@ -68,6 +68,7 @@ public class Manager {
             }
         }
     }
+ 
     public void asignLecturerToDepartment (Lecturer lecturer, Department department) {
         lecturer.setDepartment(department);
         if (department.getNumOfLecturers() == department.getLecturers().length) 
@@ -82,6 +83,7 @@ public class Manager {
         lecturer.getCommittees()[lecturer.getNumOfCommittees()] = committee;
         lecturer.setNumOfCommittees(lecturer.getNumOfCommittees() + 1);
     }
+   
     public void addLecturer(Lecturer lecturer) {
         if (numOfLecturers == lecturers.length) 
             lecturers = copyArray(lecturers, numOfLecturers ,numOfLecturers == 0 ? 2 : numOfLecturers * 2);
@@ -97,7 +99,6 @@ public class Manager {
         return newArr;
     }
 
-
     public boolean isExistLecturer(String name) {
         for (int i = 0; i < numOfLecturers; i++) {
             if (lecturers[i].getName().equals(name))
@@ -106,8 +107,7 @@ public class Manager {
         return false;
     }
 
-
-    public Lecturer getLecturerByName(String name) {
+     public Lecturer getLecturerByName(String name) {
         for (int i = 0; i < numOfLecturers; i++) {
             if (lecturers[i].getName().equals(name))
                 return lecturers[i];
@@ -139,14 +139,12 @@ public class Manager {
         }
     }
 
-
-     public void addDepartment(Department department) {
+    public void addDepartment(Department department) {
         if (numOfDepartments == departments.length) 
             departments = copyArray(departments, numOfDepartments ,numOfDepartments == 0 ? 2 : numOfDepartments * 2);
         departments[numOfDepartments] = department;
         numOfDepartments++;
      }
-
 
     public Department[] copyArray(Department[] arr, int currentSize, int newSize) {
         Department[] newArr = new Department[newSize];  // Create new array with newSize
@@ -156,7 +154,6 @@ public class Manager {
         return newArr;
     }
     
-
     public boolean isExistDepartment(String name) {
         for (int i = 0; i < numOfDepartments; i++) {
             if (departments[i].getName().equals(name))
@@ -164,9 +161,7 @@ public class Manager {
         }
         return false;
     }
-
-
-
+    
     public Department getDepartmentByName(String name) {
         for (int i = 0; i < numOfDepartments; i++) {
             if (departments[i].getName().equals(name))
@@ -174,7 +169,6 @@ public class Manager {
         }
         return null;
     }   
-
 
     public int calcAvgDep(String depName) {
         int sum = 0;
@@ -190,8 +184,6 @@ public class Manager {
         
     }
 
-
-
     public void addCommittee(Committee committee) {
         if (numOfCommittees == committees.length) 
             committees = copyArray(committees, numOfCommittees ,numOfCommittees == 0 ? 2 : numOfCommittees * 2);
@@ -199,8 +191,6 @@ public class Manager {
         numOfCommittees++;
     }
 
-
-    
     public Committee[] copyArray(Committee[] arr, int currentSize, int newSize) {
         Committee[] newArr = new Committee[newSize];  // Create new array with newSize
         for (int i = 0; i < currentSize; i++) {  // Copy existing elements
@@ -234,17 +224,8 @@ public class Manager {
         }
     }
 
-    
     public void updateChairOfCommittee(Committee commiitte, Lecturer newChair) {
         commiitte.setChair(newChair);
     }
 
-    
-
-    
-
-    
-
-    
-    
 }
