@@ -39,4 +39,18 @@ public class Committee {
         this.members = members;
     }
 
+    public void tostring() {
+        System.out.println("name: " + name);
+        System.out.println("chair: " + chair.getName());
+        System.out.println("numOfMembers: " + numOfMembers);
+        if (members != null) {
+            System.out.println("members: ");
+            for (int i = 0; i < numOfMembers; i++) {
+                System.out.println(members[i].getName());
+            }
+        } else {
+            System.out.println("members: null");
+        }
+        System.out.println("--------------------------------------------------"); 
+    }
 }

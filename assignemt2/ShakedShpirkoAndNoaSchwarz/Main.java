@@ -66,18 +66,34 @@ public class Main {
     }
 
     private static void testing(){
-        Lecturer newLecturer = new Lecturer("stav", "1", "degreename", DegreeLevel.BACHELOR, 109);
-            manager.addLecturer(newLecturer);
-        Lecturer newLecturer2 = new Lecturer("shaked", "2", "degreename", DegreeLevel.MASTER, 115);
-            manager.addLecturer(newLecturer2);
-        Lecturer newLecturer3 = new Lecturer("noa", "3", "degreename", DegreeLevel.PROFESSOR, 154);
-            manager.addLecturer(newLecturer3);
-        Department newDepartment = new Department("dep");
-        manager.addDepartment(newDepartment);
-        manager.asignLecturerToDepartment(newLecturer3, newDepartment);
-        Committee committee = new Committee("com", newLecturer);
-        manager.addCommittee(committee);
-        manager.asignLecturerToCommittee(newLecturer,committee);
+        Lecturer stav = new Lecturer("stav", "1", "degreename", DegreeLevel.BACHELOR, 51);
+            manager.addLecturer(stav);
+        Lecturer shaked = new Lecturer("shaked", "2", "degreename", DegreeLevel.MASTER, 50);
+            manager.addLecturer(shaked);
+        Lecturer noa = new Lecturer("noa", "3", "degreename", DegreeLevel.PROFESSOR, 51);
+            manager.addLecturer(noa);
+        Department computerscience = new Department("computer science");
+        manager.addDepartment(computerscience);
+        Department math = new Department("math");
+        manager.addDepartment(math);
+        manager.asignLecturerToDepartment(shaked, computerscience);
+        Committee stemCommittee = new Committee("stem", noa);
+        manager.addCommittee(stemCommittee);
+        manager.asignLecturerToCommittee(stav,stemCommittee);
+        manager.asignLecturerToCommittee(shaked,stemCommittee);
+        manager.asignLecturerToDepartment(stav, computerscience);
+        manager.asignLecturerToDepartment(shaked, math);
+        manager.asignLecturerToDepartment(noa, computerscience);
+        stav.tostring();
+        shaked.tostring();
+        noa.tostring();
+        computerscience.tostring();
+        math.tostring();
+        stemCommittee.tostring();
+        System.out.println("Average salary of all lecturers: " + manager.calcAvgSalary());
+        System.out.println("Average salary of department: " + manager.calcAvgDep(computerscience.getName()));
+        
+
 
     }
 

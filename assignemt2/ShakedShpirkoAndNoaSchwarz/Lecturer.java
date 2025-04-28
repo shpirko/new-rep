@@ -101,6 +101,31 @@ public class Lecturer {
         this.committees = committees;
     }
 
+    
+    public void tostring() {
+        System.out.println("name: " + name);
+        System.out.println("id: " + id);
+        System.out.println("degreeName: " + degreeName);
+        System.out.println("degreeLevel: " + degreeLevel.getDisplayName());
+        System.out.println("salary: " + salary);
+        if (department != null) {
+            System.out.println("department: " + department.getName());
+        } else {
+            System.out.println("department: null");
+        }
+        System.out.println("numOfCommittees: " + numOfCommittees);
+        if (committees != null) {
+            System.out.println("committees: ");
+            for(int i = 0; i < numOfCommittees; i++) {
+                System.out.println(committees[i].getName());
+            }
+        } else {
+            System.out.println("committees: null");
+        }
+        System.out.println("--------------------------------------------------");
+
+    }
+
 
 
     

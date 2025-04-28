@@ -136,7 +136,7 @@ public class Manager {
         return false;
     }
 
-     public Lecturer getLecturerByName(String name) {
+    public Lecturer getLecturerByName(String name) {
         for (int i = 0; i < numOfLecturers; i++) {
             if (lecturers[i].getName().equals(name))
                 return lecturers[i];
@@ -157,19 +157,13 @@ public class Manager {
         return sum / numOfLecturers;
     }
     
-
     public void lucturersInfo(){
         if(numOfLecturers == 0){
             System.out.println("There are no lecturers in the system");
         }
     for (int i = 0; i < numOfLecturers; i++){
-        System.out.println("Lucturer: " + lecturers[i].getName());
-        System.out.println("ID: " + lecturers[i].getId());
-        System.out.println("Degree name: " + lecturers[i].getDegreeName());
-        System.out.println("Degree level: " + lecturers[i].getDegreeLevel());
-        System.out.println("Salary: " + lecturers[i].getSalary());
-        System.out.println("Department: " + (lecturers[i].getDepartment() != null ? lecturers[i].getDepartment().toString() : "None"));
-        System.out.println("Committees: " + (lecturers[i].getCommittees() != null ? lecturers[i].getCommittees() : "None") + "\n");
+        lecturers[i].tostring();
+        System.out.println("--------------------------------------------------"); 
         }
     }
 

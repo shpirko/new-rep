@@ -30,9 +30,21 @@ public class Department {
         this.lecturers = lecturers;
     }
 
-    @Override
-    public String toString() {
-    return "Department: " + name;
+    
+    public void tostring() {
+        System.out.println("name: " + name);
+        System.out.println("numOfLecturers: " + numOfLecturers);
+        if (lecturers != null) {
+            System.out.println("lecturers: ");
+            for(int i = 0; i < numOfLecturers; i++) {
+                System.out.println(lecturers[i].getName());
+            }
+        } else {
+            System.out.println("lecturers: null");
+        }
+        System.out.println("--------------------------------------------------"); 
+        
+    
     }
 
 
