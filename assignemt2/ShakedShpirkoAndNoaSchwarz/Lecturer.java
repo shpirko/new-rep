@@ -101,8 +101,8 @@ public class Lecturer {
         this.committees = committees;
     }
 
-    
-    
+
 
     
+   
 }

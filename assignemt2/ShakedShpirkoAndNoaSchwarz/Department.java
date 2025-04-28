@@ -30,4 +30,10 @@ public class Department {
         this.lecturers = lecturers;
     }
 
+    @Override
+    public String toString() {
+    return "Department: " + name;
+    }
+
+
 }

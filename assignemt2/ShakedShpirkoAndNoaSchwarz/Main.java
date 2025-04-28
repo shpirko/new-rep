@@ -72,6 +72,12 @@ public class Main {
             manager.addLecturer(newLecturer2);
         Lecturer newLecturer3 = new Lecturer("noa", "3", "degreename", DegreeLevel.PROFESSOR, 154);
             manager.addLecturer(newLecturer3);
+        Department newDepartment = new Department("dep");
+        manager.addDepartment(newDepartment);
+        manager.asignLecturerToDepartment(newLecturer3, newDepartment);
+        Committee committee = new Committee("com", newLecturer);
+        manager.addCommittee(committee);
+        manager.asignLecturerToCommittee(newLecturer,committee);
 
     }
 
@@ -109,8 +115,7 @@ public class Main {
             System.out.println("Enter salary: ");
             int salary = s.nextInt();
             s.nextLine();
-            Lecturer newLecturer = new Lecturer(name, id, degreename, elevel, salary);
-            manager.addLecturer(newLecturer);
+            manager.createLecturer(name, id, degreename, elevel, salary);
             System.out.println("Lucturer added successfully!");
         }
         
@@ -130,8 +135,7 @@ public class Main {
             
         }
         else{
-            Department newDepartment = new Department(name);
-            manager.addDepartment(newDepartment);
+            manager.createDepartment(name);
             System.out.println("Department added successfully!");
         }
         
@@ -176,8 +180,7 @@ public class Main {
             }
                 }
                 else{
-                    Committee newCommittee = new Committee(name,chair);
-                    manager.addCommittee(newCommittee);
+                    manager.createCommittee(chairName, chair);
                     System.out.println("Committee added successfully!");
                 }
             }
