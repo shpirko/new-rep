@@ -196,7 +196,7 @@ public class Main {
             }
                 }
                 else{
-                    manager.createCommittee(chairName, chair);
+                    manager.createCommittee(name, chair);
                     System.out.println("Committee added successfully!");
                 }
             }

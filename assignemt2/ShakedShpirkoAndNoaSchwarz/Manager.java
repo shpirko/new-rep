@@ -260,7 +260,7 @@ public class Manager {
     for (int i = 0; i < numOfCommittees; i++){
         System.out.println("Committee name: " + committees[i].getName()); 
         System.out.println("Chairman name: " + committees[i].getChairName());
-        System.out.println("Members: " + committees[i].getMembers());
+        System.out.println("Members: " + committees[i].getCommitteeMembersNames());
         }
     }
 
