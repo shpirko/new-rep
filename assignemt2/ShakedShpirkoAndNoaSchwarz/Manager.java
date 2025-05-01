@@ -19,6 +19,24 @@ public class Manager {
         this.departments = new Department[0];
     }
 
+    public void showAllInfo() {
+        for (int i = 0; i < numOfLecturers; i++) {
+            lecturers[i].tostring();
+            System.out.println("--------------------------------------------------");
+            
+        }
+        for (int i = 0; i < numOfDepartments; i++) {
+            departments[i].tostring();
+            System.out.println("--------------------------------------------------");
+            
+        }
+        for (int i = 0; i < numOfCommittees; i++) {
+            committees[i].tostring();
+            System.out.println("--------------------------------------------------");
+            
+        }
+
+    }
     public boolean isLecturrerInCommittee(Lecturer lecturer, Committee committee) {
         for (int i = 0; i < committee.getNumOfMembers(); i++) {
             if (committee.getMembers()[i].getName().equals(lecturer.getName()))
@@ -70,6 +88,8 @@ public class Manager {
                 break;
             }
         }
+
+        
         
     }
  

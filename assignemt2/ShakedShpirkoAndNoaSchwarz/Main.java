@@ -17,6 +17,7 @@ public class Main {
         "Show All Lecturers Info",
         "Show All Committees Info",
         "testing",
+        "show everhything",
         // Add more options
     };
     
@@ -35,6 +36,10 @@ public class Main {
         
     }
 
+    private static void showAllInfo(){
+        System.out.println("Presenting all info: ");
+        manager.showAllInfo();
+    }
     private static void run() {
         do {
             userChosenNum = showMenu(s);
@@ -53,6 +58,7 @@ public class Main {
                 case 10 -> showAllLecturersInfo();
                 case 11 -> showAllCommitteesInfo();
                 case 12 -> testing();
+                case 13 -> showAllInfo();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -66,23 +72,21 @@ public class Main {
     }
 
     private static void testing(){
-        Lecturer stav = new Lecturer("stav", "1", "degreename", DegreeLevel.BACHELOR, 51);
-            manager.addLecturer(stav);
-        Lecturer shaked = new Lecturer("shaked", "2", "degreename", DegreeLevel.MASTER, 50);
-            manager.addLecturer(shaked);
-        Lecturer noa = new Lecturer("noa", "3", "degreename", DegreeLevel.PROFESSOR, 51);
+        Lecturer noa = new Lecturer("noa", "1", "CS1", DegreeLevel.BACHELOR, 51);
             manager.addLecturer(noa);
+        Lecturer shaked = new Lecturer("shaked", "2", "CS1", DegreeLevel.MASTER, 50);
+            manager.addLecturer(shaked);
+        Lecturer stav = new Lecturer("stav", "3", "CS2", DegreeLevel.PROFESSOR, 51);
+            manager.addLecturer(stav);
         Department computerscience = new Department("computer science");
         manager.addDepartment(computerscience);
         Department math = new Department("math");
         manager.addDepartment(math);
         manager.asignLecturerToDepartment(shaked, computerscience);
-        Committee stemCommittee = new Committee("stem", noa);
+        Committee stemCommittee = new Committee("stem", stav);
         manager.addCommittee(stemCommittee);
-        manager.asignLecturerToCommittee(stav,stemCommittee);
         manager.asignLecturerToCommittee(shaked,stemCommittee);
         manager.asignLecturerToDepartment(stav, computerscience);
-        manager.asignLecturerToDepartment(shaked, math);
         manager.asignLecturerToDepartment(noa, computerscience);
         stav.tostring();
         shaked.tostring();
