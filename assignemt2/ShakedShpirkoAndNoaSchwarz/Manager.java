@@ -37,6 +37,7 @@ public class Manager {
         }
 
     }
+   
     public boolean isLecturrerInCommittee(Lecturer lecturer, Committee committee) {
         for (int i = 0; i < committee.getNumOfMembers(); i++) {
             if (committee.getMembers()[i].getName().equals(lecturer.getName()))
@@ -181,9 +182,10 @@ public class Manager {
         if(numOfLecturers == 0){
             System.out.println("There are no lecturers in the system");
         }
-    for (int i = 0; i < numOfLecturers; i++){
-        lecturers[i].tostring();
-        System.out.println("--------------------------------------------------"); 
+
+        for (int i = 0; i < numOfLecturers; i++){
+            lecturers[i].tostring();
+            System.out.println("--------------------------------------------------"); 
         }
     }
 
@@ -277,13 +279,11 @@ public class Manager {
         if(numOfCommittees == 0){
             System.out.println("There are no committees in the system");
         }
-    for (int i = 0; i < numOfCommittees; i++){
-        System.out.println("Committee name: " + committees[i].getName()); 
-        System.out.println("Chairman name: " + committees[i].getChairName());
-        System.out.println("Members: " + committees[i].getCommitteeMembersNames());
+        for (int i = 0; i < numOfCommittees; i++){
+            committees[i].tostring();
+            System.out.println("--------------------------------------------------"); 
+            }
         }
-    }
-
     
 
 }
