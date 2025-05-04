@@ -1,4 +1,5 @@
 package ShakedShpirkoAndNoaSchwarz;
+// Shaked Shpirko 315142372 & Noa Schwarz 212840516
 import java.util.Scanner;
 
 import ShakedShpirkoAndNoaSchwarz.Lecturer.DegreeLevel;
