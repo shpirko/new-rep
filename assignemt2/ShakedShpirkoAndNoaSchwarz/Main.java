@@ -16,9 +16,7 @@ public class Main {
         "Show Average Salary of Lecturers in Department",
         "Show All Lecturers Info",
         "Show All Committees Info",
-        "testing",
-        "show everhything",
-        // Add more options
+        
     };
     
     private static Scanner s;
@@ -36,11 +34,6 @@ public class Main {
         
     }
 
-    private static void showAllInfo(){
-        System.out.println("Presenting all info: ");
-        manager.showAllInfo();
-    }
-    
     private static void run() {
         do {
             userChosenNum = showMenu(s);
@@ -58,8 +51,6 @@ public class Main {
                 case 9 -> showAverageSalaryOfLecturersInDepartment();
                 case 10 -> showAllLecturersInfo();
                 case 11 -> showAllCommitteesInfo();
-                case 12 -> testing();
-                case 13 -> showAllInfo();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -71,27 +62,6 @@ public class Main {
         Main.manager = new Manager(s.nextLine());
         run();
         s.close();
-    }
-
-    private static void testing(){
-        Lecturer noa = new Lecturer("noa", "1", "CS1", DegreeLevel.BACHELOR, 51);
-            manager.addLecturer(noa);
-        Lecturer shaked = new Lecturer("shaked", "2", "CS1", DegreeLevel.MASTER, 50);
-            manager.addLecturer(shaked);
-        Lecturer stav = new Lecturer("stav", "3", "CS2", DegreeLevel.PROFESSOR, 51);
-            manager.addLecturer(stav);
-        Department computerscience = new Department("computer science");
-        manager.addDepartment(computerscience);
-        Department math = new Department("math");
-        manager.addDepartment(math);
-        Committee stemCommittee = new Committee("stem", stav);
-        manager.addCommittee(stemCommittee);
-        manager.asignLecturerToCommittee(shaked,stemCommittee);
-        manager.asignLecturerToDepartment(shaked, computerscience);
-        manager.asignLecturerToDepartment(stav, computerscience);
-        manager.asignLecturerToDepartment(noa, computerscience);
-        System.out.println("Average salary of all lecturers: " + manager.calcAvgSalary());
-        System.out.println("Average salary of department: " + manager.calcAvgDep(computerscience.getName()));
     }
 
     private static void addLecturer() {

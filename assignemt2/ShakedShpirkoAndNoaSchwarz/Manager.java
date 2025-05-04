@@ -19,24 +19,7 @@ public class Manager {
         this.departments = new Department[0];
     }
 
-    public void showAllInfo() {
-        for (int i = 0; i < numOfLecturers; i++) {
-            lecturers[i].tostring();
-            System.out.println("--------------------------------------------------");
-            
-        }
-        for (int i = 0; i < numOfDepartments; i++) {
-            departments[i].tostring();
-            System.out.println("--------------------------------------------------");
-            
-        }
-        for (int i = 0; i < numOfCommittees; i++) {
-            committees[i].tostring();
-            System.out.println("--------------------------------------------------");
-            
-        }
-
-    }
+    
    
     public boolean isLecturrerInCommittee(Lecturer lecturer, Committee committee) {
         for (int i = 0; i < committee.getNumOfMembers(); i++) {
@@ -101,7 +84,6 @@ public class Manager {
         }
         if (department.getNumOfLecturers() == department.getLecturers().length) 
             department.setLecturers(copyArray(department.getLecturers(), department.getNumOfLecturers() ,department.getNumOfLecturers() == 0 ? 2 : department.getNumOfLecturers() * 2));
-        department.getLecturers()[department.getNumOfLecturers()] = lecturer;
 
         department.getLecturers()[department.getNumOfLecturers()] = lecturer;
         department.setNumOfMembers(department.getNumOfLecturers() + 1);
