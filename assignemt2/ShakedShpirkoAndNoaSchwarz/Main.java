@@ -45,13 +45,16 @@ public class Main {
                 case 2 -> addCommittee();
                 case 3 -> addDepartment();
                 case 4 -> updateChairOfCommittee();
-                case 5 -> removeLecturerFromCommittee();
-                case 6 -> asignLecturerToCommittee();
-                case 7 -> asignLecturerToDepartment();
-                case 8 -> showAverageSalaryOfAllLecturers();
-                case 9 -> showAverageSalaryOfLecturersInDepartment();
-                case 10 -> showAllLecturersInfo();
-                case 11 -> showAllCommitteesInfo();
+                //case 5 -> removeLecturerFromCommittee();
+                //case 6 -> asignLecturerToCommittee();
+                //case 7 -> asignLecturerToDepartment();
+                //case 8 -> showAverageSalaryOfAllLecturers();
+                //case 9 -> showAverageSalaryOfLecturersInDepartment();
+                //case 10 -> showAllLecturersInfo();
+                //case 11 -> showAllCommitteesInfo();*/
+                //case 12 -> compareLecturersByPapers();
+                //case 13 -> compareCommittee();
+                //case 14 -> duplicateCommittee();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -66,19 +69,11 @@ public class Main {
     }
 
     private static void addLecturer() {
-        System.out.println("Enter lecturer name: ");
-        String name = s.nextLine();
-        if(manager.isExistLecturer(name)){
-            System.out.println("\nLecturer name already exists in the system");
-            System.out.println("press 1 to change the Lecturer name or 2 to return to menu");;
-            if (s.nextInt() == 1) {
-                s.nextLine(); 
-                addLecturer ();
-                
-            }
-            
-        }
-        else{
+        
+        try{
+            System.out.println("Enter lecturer name: ");
+            String name = s.nextLine();
+            manager.isExistLecturer(name);
             System.out.println("Enter lecturer ID: ");
             String id = s.nextLine();
             System.out.println("Enter degree name: ");
@@ -102,191 +97,151 @@ public class Main {
             manager.createLecturer(name, id, degreename, elevel, salary);
             System.out.println("Lucturer added successfully!");
         }
-        
-    }
-
-    private static void addDepartment() {
-        System.out.println("Enter department name: ");
-        String name = s.nextLine();
-        if(manager.isExistDepartment(name)){
-            System.out.println("\nDepartment name already exists in the system");
-            System.out.println("press 1 to change the Department name or 2 to return to menu");;
+        catch (LecturrerExistException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to change the Lecturer name or 2 to return to menu");
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addDepartment ();
+                addLecturer ();
+                
+            }
+        }
+
+    }
+
+   private static void addDepartment() {
+        try{
+            System.out.println("Enter department name: ");
+            String name = s.nextLine();
+            manager.isExistDepartment(name);
+            manager.createDepartment(name);
+            System.out.println("Department added successfully!");
+        }
+        catch(DepartmentExistException e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to change the Department name or 2 to return to menu");;
+            if (s.nextInt() == 1) {   
+              s.nextLine(); 
+             addDepartment ();
                 
             }
             
-        }
-        else{
-            manager.createDepartment(name);
-            System.out.println("Department added successfully!");
         }
         
     }
 
     private static void addCommittee(){
-        System.out.println("Enter committee name: ");
-        String name = s.nextLine();
-        if(manager.isExistCommittee(name)){
-            System.out.println("\nCommittee name already exists in the system");
-            System.out.println("press 1 to change the Committee name or 2 to return to menu");;
+        try {
+            System.out.println("Enter committee name: ");
+            String name = s.nextLine();
+            manager.isExistCommittee(name);
+            System.out.println("Enter chairman name: ");
+            String chairName = s.nextLine();
+            manager.isNotExistLecturer(chairName);
+            Lecturer chair = manager.getLecturerByName(chairName);
+            manager.notProOrDoc(chair);
+            manager.createCommittee(name, chair);
+            System.out.println("Committee added successfully!");
+        }
+        catch (CommitteeExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
                 addCommittee ();
-                
             }
             
         }
-        else{
-            System.out.println("Enter chairman name: ");
-            String chairName = s.nextLine();
-            if(!manager.isExistLecturer(chairName))
-            {
-                System.out.println("Lecturrer does not exist in the system, please add him first");
-                System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
-                if (s.nextInt() == 1) {
-                    s.nextLine(); 
-                    addLecturer ();
-                    
-                }
+        catch (LecturerNotExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addLecturer ();
+                
             }
-            else{
-                Lecturer chair = manager.getLecturerByName(chairName);
-                if(chair.getDegreeLevel() == DegreeLevel.BACHELOR || chair.getDegreeLevel() == DegreeLevel.MASTER){
-                    System.out.println("Chairman must be at least a PhD degree holder");
-                    System.out.println("press 1 to add Committee or 2 to return to menu");  
-                    if (s.nextInt() == 1) {
-                        s.nextLine();
-                        addCommittee();
-                        
-                    
-            }
-                }
-                else{
-                    manager.createCommittee(name, chair);
-                    System.out.println("Committee added successfully!");
-                }
+        }
+        catch (notProOrDocException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");  
+            if (s.nextInt() == 1) {
+                s.nextLine();
+                addCommittee();
             }
         }
     }
+            
+        
+    
 
     private static void updateChairOfCommittee(){
-        System.out.println("Enter committee name: ");
-        String comName = s.nextLine();
-        if(!manager.isExistCommittee(comName)){
-            System.out.println("\nThe committee does not exist in the system");
-            System.out.println("press 1 to create a Committee or 2 to return to menu");;
-            if (s.nextInt() == 1) {
-                s.nextLine(); 
-                addCommittee ();
-                
-            }    
-        }
-        else{
-            Committee commmittee = manager.getCommitteeByName(comName);
+        try {
+            System.out.println("Enter committee name: ");
+            String comName = s.nextLine();
+            manager.isNotExistCommittee(comName);
+            Committee com = manager.getCommitteeByName(comName);
             System.out.println("Enter new chairman name: ");
             String chairName = s.nextLine();
-            if(!manager.isExistLecturer(chairName))
-            {
-                System.out.println("Lecturrer does not exist in the system, please add him first");
-                System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
-                if (s.nextInt() == 1) {
-                    s.nextLine(); 
-                    addLecturer ();
-                    
-                }
-            }
-            else{
-                Lecturer chair = manager.getLecturerByName(chairName);
-                if(manager.isLecturrerInCommittee(chair, commmittee)){
-                    System.out.println("New chairman can't be in the committee");
-                    System.out.println("Press 1 to assign a new chairman to committee or 2 to return to menu");  
-                    if (s.nextInt() == 1) {
-                        s.nextLine();
-                        updateChairOfCommittee();
-                        
-                    }   
-                }
-                else{
-                    if(chair.getDegreeLevel() == DegreeLevel.BACHELOR || chair.getDegreeLevel() == DegreeLevel.MASTER){
-                            System.out.println("Chairman must be at least a PhD degree holder");
-                            System.out.println("Press 1 to asign a diffrent chairman to the committee or 2 to return to menu");  
-                            if (s.nextInt() == 1) {
-                                s.nextLine();
-                                updateChairOfCommittee();
-                            
-                            }  
-                        
-                        }
-                    else{
-                        if(commmittee.getChairName().equals(chair.getName())){
-                            System.out.println("Lecturer is already the chairman of the committee");
-                            System.out.println("Press 1 to asign a diffrent chairman to the committee or 2 to return to menu");  
-                            if (s.nextInt() == 1) {
-                                s.nextLine();
-                                updateChairOfCommittee();
-                            
-                            }  
-                        }
-                        else{
-                            manager.updateChairOfCommittee(commmittee, chair);
-                            System.out.println("Chairman updated successfully!");
-                        }
-                            
-                    }
-
-                }
-            }
+            manager.isNotExistLecturer(chairName);
+            Lecturer chair = manager.getLecturerByName(chairName);
+            manager.notProOrDoc(chair);
+            manager.isLecturrerInCommittee(chair, com);
+            manager.isChairAlreadyChairOfCommittee(chair, com);
+            manager.updateChairOfCommittee(com, chair);
+            System.out.println("Chairman updated successfully!");
         }
-    } 
-
-    private static void removeLecturerFromCommittee(){
-        System.out.println("Enter committee name: ");
-        String comName = s.nextLine();
-        if(!manager.isExistCommittee(comName)){
-            System.out.println("\nThe committee does not exist in the system");
-            System.out.println("press 1 to create a Committee or 2 to return to menu");;
+        catch (CommitteeNotExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to add Committee or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
                 addCommittee ();
+            }
+        }
+        catch (LecturerNotExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addLecturer ();
                 
-            }    
-        }
-        else{
-            Committee commmittee = manager.getCommitteeByName(comName);
-            System.out.println("Enter lecturer name: ");
-            String lectName = s.nextLine();
-            if(!manager.isExistLecturer(lectName))
-            {
-                System.out.println("Lecturrer does not exist in the system, please add him first");
-                System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
-                if (s.nextInt() == 1) {
-                    s.nextLine(); 
-                    addLecturer ();
-                    
-                }
-            }
-            else{
-                Lecturer lect = manager.getLecturerByName(lectName);
-                if (!manager.isLecturrerInCommittee(lect, commmittee)){
-                    System.out.println("Lecturer is not in the committee");
-                    System.out.println("Press 1 to remove a diffrent lecturer from the committee or 2 to return to menu");  
-                    if (s.nextInt() == 1) {
-                        s.nextLine();
-                        removeLecturerFromCommittee();
-                        
-                    }   
-                }
-                else{
-                    manager.removeLecturerFromCommittee(lect, commmittee);
-                    System.out.println("Lecturer removed from committee successfully!");
-                }
             }
         }
-
+        catch (notProOrDocException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");  
+            if (s.nextInt() == 1) {
+                s.nextLine();
+                updateChairOfCommittee();
+            }
+        }
+        catch (LecturrerAlreadyCairException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");  
+            if (s.nextInt() == 1) {
+                s.nextLine();
+                updateChairOfCommittee();
+            }
+        }
+        catch (LecturrerInCommitteeException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");  
+            if (s.nextInt() == 1) {
+                s.nextLine();
+                updateChairOfCommittee();
+            }
+        }
+        
+        
+        
     }
 
+   
+        
+
+    
+/* 
     private static void asignLecturerToCommittee()
     {
         System.out.println("Enter committee name: ");
@@ -430,7 +385,7 @@ public class Main {
         System.out.println("Presenting all committies info: ");
         manager.committeesInfo();
 
-    }
+    }*/
 
 
 }

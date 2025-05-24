@@ -15,8 +15,8 @@ public class Committee {
         return name;
     }
 
-    public String getChairName() {
-        return chair.getName();
+    public Lecturer getChairman() {
+        return chair;
     }
 
     public int getNumOfMembers() {
@@ -48,6 +48,31 @@ public class Committee {
             }
         }
         return names;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Committee committee = (Committee) obj;
+        return name.equals(committee.name);
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Committee: ").append(name).append(", Chair: ").append(chair.getName()).append(", Number of Members: ").append(numOfMembers).append(", Members: ");
+        if (numOfMembers != 0) {
+            for (int i = 0; i < numOfMembers; i++) {
+                sb.append(members[i].getName());
+                if (i < numOfMembers - 1) {
+                    sb.append(", ");
+                }
+            }
+        } else {
+            sb.append("null");
+            
+        }
+        return sb.toString();
     }
     
     public void tostring() {

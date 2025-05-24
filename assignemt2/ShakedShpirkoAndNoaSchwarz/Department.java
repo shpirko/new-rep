@@ -30,6 +30,23 @@ public class Department {
         this.lecturers = lecturers;
     }
 
+
+    @Override
+    public String toString() {
+        if(numOfLecturers == 0) {
+            return "Department: " + name + ", Number of Lecturers: " + numOfLecturers + ", Lecturers: null";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Department: ").append(name).append(", Number of Lecturers: ").append(numOfLecturers).append(", Lecturers: ");
+        for (int i = 0; i < numOfLecturers; i++) {
+            sb.append(lecturers[i].getName());
+            if (i < numOfLecturers - 1) {
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
     
     public void tostring() {
         System.out.println("name: " + name);

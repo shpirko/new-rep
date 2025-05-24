@@ -21,12 +21,12 @@ public class Manager {
 
     
    
-    public boolean isLecturrerInCommittee(Lecturer lecturer, Committee committee) {
+    public void isLecturrerInCommittee(Lecturer lecturer, Committee committee) throws LecturrerInCommitteeException {
         for (int i = 0; i < committee.getNumOfMembers(); i++) {
             if (committee.getMembers()[i].getName().equals(lecturer.getName()))
-                return true;
+                return;
         }
-        return false;
+        throw new LecturrerInCommitteeException("Lecturer " + lecturer.getName() + " is already in committee " + committee.getName() + ".");
     }
 
     public void removeLecturerFromCommittee(Lecturer lec, Committee committee) {
@@ -112,8 +112,20 @@ public class Manager {
     }
 
     public void createLecturer(String name, String id, String degreeName, Lecturer.DegreeLevel degreeLevel, int salary){
-        Lecturer newLecturer = new Lecturer(name, id, degreeName, degreeLevel, salary);
-        addLecturer(newLecturer);
+        if (degreeLevel.equals(Lecturer.DegreeLevel.PHD)) {
+            Doctor newLecturer = new Doctor(name, id, degreeName, degreeLevel, salary);
+            addLecturer(newLecturer);
+            return;
+        }
+        if (degreeLevel.equals(Lecturer.DegreeLevel.PROFESSOR)) {
+            Professor newLecturer = new Professor(name, id, degreeName, degreeLevel, salary);
+            addLecturer(newLecturer);
+            return;     
+        }
+
+        Lecturer lecturer = new Lecturer(name, id, degreeName, degreeLevel, salary);
+        addLecturer(lecturer);
+        
     }
    
     public void addLecturer(Lecturer lecturer) {
@@ -131,12 +143,20 @@ public class Manager {
         return newArr;
     }
 
-    public boolean isExistLecturer(String name) {
+    public void isExistLecturer(String name) throws LecturrerExistException {
         for (int i = 0; i < numOfLecturers; i++) {
             if (lecturers[i].getName().equals(name))
-                return true;
+                throw new LecturrerExistException("Lecturer with name " + name + " already exists.");
         }
-        return false;
+        
+    }
+
+    public void isNotExistLecturer(String name) throws LecturerNotExistException {
+        for (int i = 0; i < numOfLecturers; i++) {
+            if (lecturers[i].getName().equals(name))
+                return;
+        }
+        throw new LecturerNotExistException("Lecturer with name " + name + " does not exist.");
     }
 
     public Lecturer getLecturerByName(String name) {
@@ -191,12 +211,11 @@ public class Manager {
         return newArr;
     }
     
-    public boolean isExistDepartment(String name) {
+    public void isExistDepartment(String name) throws DepartmentExistException {
         for (int i = 0; i < numOfDepartments; i++) {
             if (departments[i].getName().equals(name))
-                return true;
+                throw new DepartmentExistException("Department with name " + name + " already exists.");
         }
-        return false;
     }
     
     public Department getDepartmentByName(String name) {
@@ -240,12 +259,19 @@ public class Manager {
         return newArr;
     }
 
-    public boolean isExistCommittee(String name) {
+    public void isExistCommittee(String name) throws CommitteeExistException {
         for (int i = 0; i < numOfCommittees; i++) {
             if (committees[i].getName().equals(name))
-                return true;
+                throw new CommitteeExistException("Committee with name " + name + " already exists.");
         }
-        return false;
+    }
+
+    public void isNotExistCommittee(String name) throws CommitteeNotExistException {
+        for (int i = 0; i < numOfCommittees; i++) {
+            if (committees[i].getName().equals(name))
+                return;
+        }
+        throw new CommitteeNotExistException("Committee with name " + name + " does not exist.");
     }
 
     public Committee getCommitteeByName(String name) {
@@ -267,5 +293,15 @@ public class Manager {
             }
         }
     
+    public void notProOrDoc(Lecturer lecturer) throws notProOrDocException
+    {
+        if(!(lecturer instanceof Professor || lecturer instanceof Doctor))
+            throw new notProOrDocException("Lecturer " + lecturer.getName() + " is not a Professor or Doctor.");
+    }
 
+    public void isChairAlreadyChairOfCommittee(Lecturer chair, Committee com) throws LecturrerAlreadyCairException {
+        if (com.getChairman().equals(chair)) 
+            throw new LecturrerAlreadyCairException("Lecturer " + chair.getName() + " is already the chairman of committee " + com.getName() + ".");
+            
+    }
 }

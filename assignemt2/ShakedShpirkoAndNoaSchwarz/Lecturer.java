@@ -7,7 +7,7 @@ public class Lecturer {
         PHD("PhD"), 
         PROFESSOR("Professor");
     
-        private final String displayName;  // Field
+        private final String displayName;  
     
         DegreeLevel(String displayName) {  // Constructor
             this.displayName = displayName;
@@ -16,17 +16,26 @@ public class Lecturer {
         public String getDisplayName() {   // Method
             return displayName;
         }
+
+
+        public boolean equals(DegreeLevel other) { // Method
+            if (this.displayName.equals(other.displayName)) {
+                return true;
+            }
+            return false;
+        }
+
     }
 
 
-    private DegreeLevel degreeLevel; // Field
-    private String name; 
-    private String id;
-    private String degreeName;
-    private int salary;
-    private Department department;
-    private int numOfCommittees; // Number of committees the lecturer is in
-    private Committee[] committees;
+    protected DegreeLevel degreeLevel; // Field
+    protected String name; 
+    protected String id;
+    protected String degreeName;
+    protected int salary;
+    protected Department department;
+    protected int numOfCommittees; // Number of committees the lecturer is in
+    protected Committee[] committees;
 
     public Lecturer(String name, String id, String degreeName, Lecturer.DegreeLevel degreeLevel, int salary) {
         this.name = name;
@@ -101,6 +110,36 @@ public class Lecturer {
         this.committees = committees;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Lecturer: ").append(name).append(", ID: ").append(id).append(", Degree Name: ").append(degreeName)
+                .append(", Degree Level: ").append(degreeLevel.getDisplayName()).append(", Salary: ").append(salary)
+                .append(", Department: ").append(department != null ? department.getName() : "null")
+                .append(", Number of Committees: ").append(numOfCommittees).append(", Committees: ");
+        if (committees != null) {
+            for (int i = 0; i < numOfCommittees; i++) {
+                sb.append(committees[i].getName());
+                if (i < numOfCommittees - 1) {
+                    sb.append(", ");
+                }
+            }
+        } else {
+            sb.append("null");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+        Lecturer other = (Lecturer) obj;
+        return this.name.equals(other.name) && this.id.equals(other.id) &&
+                this.degreeName.equals(other.degreeName) && this.degreeLevel.equals(other.degreeLevel) &&
+                this.salary == other.salary && this.department.equals(other.department) &&
+                this.numOfCommittees == other.numOfCommittees && this.committees.equals(other.committees);
+    }
     
     public void tostring() {
         System.out.println("name: " + name);
@@ -125,6 +164,8 @@ public class Lecturer {
         System.out.println("--------------------------------------------------");
 
     }
+
+    
 
 
 
