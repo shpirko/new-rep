@@ -15,6 +15,16 @@ public class Doctor extends Lecturer {
         Doctor doctor = (Doctor) obj;
         return super.equals(obj) && numOfPapers == doctor.numOfPapers;
     }
+
+    public void addPublishedPaper(String paper) {
+        if (numOfPapers == 0) {
+            PublishedPapers = new String[2];
+        } else {
+            String[] newPublishedPapers = new String[numOfPapers + 1];
+            System.arraycopy(PublishedPapers, 0, newPublishedPapers, 0, numOfPapers);
+            PublishedPapers = newPublishedPapers;
+        }
+    }
 }
 
 

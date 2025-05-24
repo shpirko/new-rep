@@ -57,36 +57,28 @@ public class Committee {
         Committee committee = (Committee) obj;
         return name.equals(committee.name);
     }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Committee: ").append(name).append(", Chair: ").append(chair.getName()).append(", Number of Members: ").append(numOfMembers).append(", Members: ");
-        if (numOfMembers != 0) {
-            for (int i = 0; i < numOfMembers; i++) {
-                sb.append(members[i].getName());
-                if (i < numOfMembers - 1) {
-                    sb.append(", ");
-                }
+    StringBuilder sb = new StringBuilder();
+    sb.append("name: ").append(name).append("\n");
+    sb.append("chair: ").append(chair != null ? chair.getName() : "null").append("\n");
+    sb.append("numOfMembers: ").append(numOfMembers).append("\n");
+    sb.append("members: ");
+    if (members != null && numOfMembers > 0) {
+        for (int i = 0; i < numOfMembers; i++) {
+            sb.append(members[i].getName());
+            if (i < numOfMembers - 1) {
+                sb.append(", ");
             }
-        } else {
-            sb.append("null");
-            
         }
-        return sb.toString();
+        sb.append("\n");
+    } else {
+        sb.append("null\n");
     }
+    sb.append("--------------------------------------------------");
+    return sb.toString();
+}
     
-    public void tostring() {
-        System.out.println("name: " + name);
-        System.out.println("chair: " + chair.getName());
-        System.out.println("numOfMembers: " + numOfMembers);
-        if (members != null) {
-            System.out.println("members: ");
-            for (int i = 0; i < numOfMembers; i++) {
-                System.out.println(members[i].getName());
-            }
-        } else {
-            System.out.println("members: null");
-        }
-        System.out.println("--------------------------------------------------"); 
-    }
+   
 }

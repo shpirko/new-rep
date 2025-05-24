@@ -19,14 +19,27 @@ public class Manager {
         this.departments = new Department[0];
     }
 
+   public void isLecturerInDepartment(Lecturer lecturer, Department department) throws LecturrerInDepartmentException {
+        if(department.equals(lecturer.getDepartment())) {
+            throw new LecturrerInDepartmentException("Lecturer " + lecturer.getName() + " is already in department " + department.getName() + ".");
+        }
+        
+    }
     
-   
     public void isLecturrerInCommittee(Lecturer lecturer, Committee committee) throws LecturrerInCommitteeException {
+        for (int i = 0; i < committee.getNumOfMembers(); i++) {
+            if (committee.getMembers()[i].getName().equals(lecturer.getName()))
+                throw new LecturrerInCommitteeException("Lecturer " + lecturer.getName() + " is already in committee " + committee.getName() + ".");
+        }
+        
+    }
+
+    public void isLecturrerNotInCommittee(Lecturer lecturer, Committee committee) throws LecturrerNotInCommitteeException {
         for (int i = 0; i < committee.getNumOfMembers(); i++) {
             if (committee.getMembers()[i].getName().equals(lecturer.getName()))
                 return;
         }
-        throw new LecturrerInCommitteeException("Lecturer " + lecturer.getName() + " is already in committee " + committee.getName() + ".");
+        throw new LecturrerNotInCommitteeException("Lecturer " + lecturer.getName() + " is not in committee " + committee.getName() + ".");
     }
 
     public void removeLecturerFromCommittee(Lecturer lec, Committee committee) {
@@ -167,28 +180,27 @@ public class Manager {
         return null;
     }
 
-    public float calcAvgSalary() {
-        float sum = 0;
+    public String calcAvgSalary() {
         if (numOfLecturers == 0) {
-            System.out.println("No lecturers in the system yet.");
-            return 0;
+            return "No lecturers in the system.";
         }
-        System.out.println("Number of Lecturers: " + numOfLecturers);
+        float sum = 0;
         for (int i = 0; i < numOfLecturers; i++) {
             sum += lecturers[i].getSalary();
         }
-        return sum / numOfLecturers;
+        float avg = sum / numOfLecturers;
+        return String.format("Average Salary of Lecturers: %.2f", avg);
     }
     
-    public void lucturersInfo(){
-        if(numOfLecturers == 0){
-            System.out.println("There are no lecturers in the system");
+    public String LecturersInfo() {
+        if (numOfLecturers == 0) {
+            return "There are no lecturers in the system.";
         }
-
-        for (int i = 0; i < numOfLecturers; i++){
-            lecturers[i].tostring();
-            System.out.println("--------------------------------------------------"); 
+        StringBuilder info = new StringBuilder();
+        for (int i = 0; i < numOfLecturers; i++) {
+            info.append(lecturers[i].toString()).append("\n");
         }
+        return info.toString();
     }
 
     public void createDepartment(String name){
@@ -218,6 +230,14 @@ public class Manager {
         }
     }
     
+    public void isNotExistDepartment(String name) throws DepartmentNotExistException {
+        for (int i = 0; i < numOfDepartments; i++) {
+            if (departments[i].getName().equals(name))
+                return;
+        }
+        throw new DepartmentNotExistException("Department with name " + name + " already exists.");
+    }
+    
     public Department getDepartmentByName(String name) {
         for (int i = 0; i < numOfDepartments; i++) {
             if (departments[i].getName().equals(name))
@@ -226,17 +246,16 @@ public class Manager {
         return null;
     }   
 
-    public float calcAvgDep(String depName) {
-        float sum = 0;
-        Department department = getDepartmentByName(depName);
-        Lecturer[] lecturers = department.getLecturers();
-        for (int i = 0; i < department.getNumOfLecturers(); i++) { 
-            sum += lecturers[i].getSalary();
-            
+    public String calcAvgDep(Department department) {
+        if (department.getNumOfLecturers() == 0) {
+            return "No lecturers in the department " + department.getName() + ".";
         }
-        if (sum == 0)
-            return 0;
-        return sum / department.getNumOfLecturers();  
+        float sum = 0;
+        for (int i = 0; i < department.getNumOfLecturers(); i++) {
+            sum += department.getLecturers()[i].getSalary();
+        }
+        float avg = sum / department.getNumOfLecturers();
+        return String.format("Average Salary of Lecturers in Department %s: %.2f", department.getName(), avg);
     }
 
     public void createCommittee(String name, Lecturer chair){
@@ -283,20 +302,42 @@ public class Manager {
     
     }
 
-    public void committeesInfo(){
-        if(numOfCommittees == 0){
-            System.out.println("There are no committees in the system");
+    public String committeesInfo(){
+        if (numOfCommittees == 0) {
+            return "There are no committees in the system.";
         }
-        for (int i = 0; i < numOfCommittees; i++){
-            committees[i].tostring();
-            System.out.println("--------------------------------------------------"); 
-            }
+        StringBuilder info = new StringBuilder();
+        for (int i = 0; i < numOfCommittees; i++) {
+            info.append(committees[i].toString()).append("\n");
         }
+        return info.toString();
+    }
     
     public void notProOrDoc(Lecturer lecturer) throws notProOrDocException
     {
         if(!(lecturer instanceof Professor || lecturer instanceof Doctor))
             throw new notProOrDocException("Lecturer " + lecturer.getName() + " is not a Professor or Doctor.");
+    }
+
+    public String allInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("College Name: ").append(collegeName).append("\n");
+        sb.append("Number of Lecturers: ").append(numOfLecturers).append("\n");
+        sb.append("Lecturers:\n");
+        for (int i = 0; i < numOfLecturers; i++) {
+            sb.append(lecturers[i].toString()).append("\n");
+        }
+        sb.append("Number of Departments: ").append(numOfDepartments).append("\n");
+        sb.append("Departments:\n");
+        for (int i = 0; i < numOfDepartments; i++) {
+            sb.append(departments[i].toString()).append("\n");
+        }
+        sb.append("Number of Committees: ").append(numOfCommittees).append("\n");
+        sb.append("Committees:\n");
+        for (int i = 0; i < numOfCommittees; i++) {
+            sb.append(committees[i].toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     public void isChairAlreadyChairOfCommittee(Lecturer chair, Committee com) throws LecturrerAlreadyCairException {
@@ -305,3 +346,4 @@ public class Manager {
             
     }
 }
+

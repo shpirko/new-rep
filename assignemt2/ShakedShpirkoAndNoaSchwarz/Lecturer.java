@@ -112,23 +112,29 @@ public class Lecturer {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Lecturer: ").append(name).append(", ID: ").append(id).append(", Degree Name: ").append(degreeName)
-                .append(", Degree Level: ").append(degreeLevel.getDisplayName()).append(", Salary: ").append(salary)
-                .append(", Department: ").append(department != null ? department.getName() : "null")
-                .append(", Number of Committees: ").append(numOfCommittees).append(", Committees: ");
-        if (committees != null) {
-            for (int i = 0; i < numOfCommittees; i++) {
-                sb.append(committees[i].getName());
-                if (i < numOfCommittees - 1) {
-                    sb.append(", ");
-                }
+    StringBuilder sb = new StringBuilder();
+    sb.append("name: ").append(name).append("\n");
+    sb.append("ID: ").append(id).append("\n");
+    sb.append("degreeName: ").append(degreeName).append("\n");
+    sb.append("degreeLevel: ").append(degreeLevel.getDisplayName()).append("\n");
+    sb.append("salary: ").append(salary).append("\n");
+    sb.append("department: ").append(department != null ? department.getName() : "null").append("\n");
+    sb.append("numOfCommittees: ").append(numOfCommittees).append("\n");
+    sb.append("committees: ");
+    if (committees != null) {
+        for (int i = 0; i < numOfCommittees; i++) {
+            sb.append(committees[i].getName());
+            if (i < numOfCommittees - 1) {
+                sb.append(", ");
             }
-        } else {
-            sb.append("null");
         }
-        return sb.toString();
+        sb.append("\n");
+    } else {
+        sb.append("null\n");
     }
+    sb.append("--------------------------------------------------");
+    return sb.toString();
+}
 
     @Override
     public boolean equals(Object obj) {
@@ -141,29 +147,7 @@ public class Lecturer {
                 this.numOfCommittees == other.numOfCommittees && this.committees.equals(other.committees);
     }
     
-    public void tostring() {
-        System.out.println("name: " + name);
-        System.out.println("id: " + id);
-        System.out.println("degreeName: " + degreeName);
-        System.out.println("degreeLevel: " + degreeLevel.getDisplayName());
-        System.out.println("salary: " + salary);
-        if (department != null) {
-            System.out.println("department: " + department.getName());
-        } else {
-            System.out.println("department: null");
-        }
-        System.out.println("numOfCommittees: " + numOfCommittees);
-        if (committees != null) {
-            System.out.println("committees: ");
-            for(int i = 0; i < numOfCommittees; i++) {
-                System.out.println(committees[i].getName());
-            }
-        } else {
-            System.out.println("committees: null");
-        }
-        System.out.println("--------------------------------------------------");
-
-    }
+    
 
     
 

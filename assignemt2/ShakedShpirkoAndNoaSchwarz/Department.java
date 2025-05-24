@@ -33,36 +33,31 @@ public class Department {
 
     @Override
     public String toString() {
-        if(numOfLecturers == 0) {
-            return "Department: " + name + ", Number of Lecturers: " + numOfLecturers + ", Lecturers: null";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Department: ").append(name).append(", Number of Lecturers: ").append(numOfLecturers).append(", Lecturers: ");
+    StringBuilder sb = new StringBuilder();
+    sb.append("name: ").append(name).append("\n");
+    sb.append("numOfLecturers: ").append(numOfLecturers).append("\n");
+    sb.append("lecturers: ");
+    if (lecturers != null && numOfLecturers > 0) {
         for (int i = 0; i < numOfLecturers; i++) {
             sb.append(lecturers[i].getName());
             if (i < numOfLecturers - 1) {
                 sb.append(", ");
             }
         }
-        return sb.toString();
+        sb.append("\n");
+    } else {
+        sb.append("null\n");
+    }
+    sb.append("--------------------------------------------------");
+    return sb.toString();
     }
 
-    
-    public void tostring() {
-        System.out.println("name: " + name);
-        System.out.println("numOfLecturers: " + numOfLecturers);
-        if (lecturers != null) {
-            System.out.println("lecturers: ");
-            for(int i = 0; i < numOfLecturers; i++) {
-                System.out.println(lecturers[i].getName());
-            }
-        } else {
-            System.out.println("lecturers: null");
-        }
-        System.out.println("--------------------------------------------------"); 
-        
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Department department = (Department) obj;
+        return name.equals(department.name);
     }
-
 
 }
