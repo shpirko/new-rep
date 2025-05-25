@@ -17,11 +17,11 @@ public class Main {
         "Show Average Salary of Lecturers in Department",
         "Show All Lecturers Info",
         "Show All Committees Info",
-        "Show All Info"
-        //, "Compare Lecturers by Papers", 
+        "Show All Info",
+        "Compare Lecturers by Papers",
+        "testing", 
         //, "Compare Committees", 
         //, "Duplicate Committee"
-        
     };
     
     private static Scanner s;
@@ -57,7 +57,8 @@ public class Main {
                 case 10 -> showAllLecturersInfo();
                 case 11 -> showAllCommitteesInfo();
                 case 12 -> showAll();
-                //case 12 -> compareLecturersByPapers();
+                case 13 -> CompareLecturersbyPapers();
+                case 14 -> testing();
                 //case 13 -> compareCommittee();
                 //case 14 -> duplicateCommittee();
                 default -> System.out.println("Incorrect input, please try again");
@@ -71,6 +72,16 @@ public class Main {
         Main.manager = new Manager(s.nextLine());
         run();
         s.close();
+    }
+
+    private static void testing(){
+        Professor newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PHD, 100);
+        newLecturer.setNumOfPapers(10);
+        System.out.println(newLecturer.getNumOfPapers());
+        manager.addLecturer(newLecturer);
+        Professor newLecturer2 = new Professor("stav", "2", "noa", DegreeLevel.PHD, 100);
+        newLecturer.setNumOfPapers(0);
+        manager.addLecturer(newLecturer2);
     }
 
     private static void addLecturer() {
@@ -125,7 +136,7 @@ public class Main {
         catch(DepartmentExistException e)
         {
             System.out.println(e.getMessage());
-            System.out.println("press 1 to change the Department name or 2 to return to menu");;
+            System.out.println("press 1 to change the Department name or 2 to return to menu");
             if (s.nextInt() == 1) {   
               s.nextLine(); 
              addDepartment ();
@@ -402,6 +413,48 @@ public class Main {
                 
             }
         }
+    }
+
+    private static void CompareLecturersbyPapers(){
+            try{
+            System.out.println("Enter first Doctor / Professor name: ");
+            String firstname = s.nextLine();
+            manager.isNotExistLecturer(firstname);
+            manager.notProOrDoc(manager.getLecturerByName(firstname));
+            System.out.println("Enter first Doctor / Professor name: ");
+            String secondname = s.nextLine();
+            manager.isNotExistLecturer(secondname);
+            manager.notProOrDoc(manager.getLecturerByName(secondname));
+            int compareResult = manager.CompareLecturersbyPapers(manager.getLecturerByName(firstname),manager.getLecturerByName(secondname));
+            if(compareResult>0){
+                System.out.println(firstname + " has more papers published");
+            }
+            else if(compareResult<0){
+                System.out.println(secondname + " has more papers published");
+            }
+            else{
+                System.out.println(firstname + " and " + secondname + " have the same number of papers published");
+            }
+        }
+        catch(LecturerNotExistException e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addLecturer ();
+                
+            }
+        }
+        catch (notProOrDocException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");  
+            if (s.nextInt() == 1) {
+                s.nextLine();
+                CompareLecturersbyPapers();
+            }
+        }
+            
     }
 
     private static void showAllLecturersInfo(){

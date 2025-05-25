@@ -91,6 +91,9 @@ public class Manager {
     }
  
     public void asignLecturerToDepartment (Lecturer lecturer, Department department) {
+        if(lecturer.getDepartment() != null){
+            removeLecturerFromDepartment(lecturer, lecturer.getDepartment());
+        }
         lecturer.setDepartment(department);
         if(department.getLecturers() == null){
             department.setLecturers(new Lecturer[0]);
@@ -344,6 +347,19 @@ public class Manager {
         if (com.getChairman().equals(chair)) 
             throw new LecturrerAlreadyCairException("Lecturer " + chair.getName() + " is already the chairman of committee " + com.getName() + ".");
             
+    }
+
+    public int CompareLecturersbyPapers(Lecturer lecturer1, Lecturer lecturer2) {
+        if(lecturer1 instanceof Professor && lecturer2 instanceof Professor){
+            return ((Professor)lecturer1).getNumOfPapers() - ((Professor)lecturer2).getNumOfPapers();  
+        }
+        else if(lecturer1 instanceof Doctor && lecturer2 instanceof Doctor){
+            return ((Doctor)lecturer1).getNumOfPapers() - ((Doctor)lecturer2).getNumOfPapers();
+        }
+        else if(lecturer1 instanceof Professor && lecturer2 instanceof Doctor){
+            return ((Professor)lecturer1).getNumOfPapers() - ((Doctor)lecturer2).getNumOfPapers();
+        }
+        return ((Doctor)lecturer1).getNumOfPapers() - ((Professor)lecturer2).getNumOfPapers();
     }
 }
 

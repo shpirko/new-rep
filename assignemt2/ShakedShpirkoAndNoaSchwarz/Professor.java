@@ -38,6 +38,30 @@ public class Professor extends Lecturer {
         return sb.toString();
     }
 
+    public String getNameOfInstitution() {
+        return nameOfInstitution;
+    }
+
+    public String[] getPublishedPapers() {
+        return PublishedPapers;
+    }
+
+    public int getNumOfPapers() {
+        return numOfPapers;
+    }
+
+    public void setNameOfInstitution(String nameOfInstitution) {
+        this.nameOfInstitution = nameOfInstitution;
+    }
+
+    public void setPublishedPapers(String[] publishedPapers) {
+        PublishedPapers = publishedPapers;
+    }
+
+    public void setNumOfPapers(int numOfPapers) {
+        this.numOfPapers = numOfPapers;
+    }
+
     
 
 

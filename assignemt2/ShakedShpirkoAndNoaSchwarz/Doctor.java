@@ -8,6 +8,8 @@ public class Doctor extends Lecturer {
         
     }
 
+    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -25,6 +27,25 @@ public class Doctor extends Lecturer {
             PublishedPapers = newPublishedPapers;
         }
     }
+
+    public String[] getPublishedPapers() {
+        return PublishedPapers;
+    }
+
+    public int getNumOfPapers() {
+        return numOfPapers;
+    }
+
+    public void setPublishedPapers(String[] publishedPapers) {
+        PublishedPapers = publishedPapers;
+    }
+
+
+    public void setNumOfPapers(int numOfPapers) {
+        this.numOfPapers = numOfPapers;
+    }
+
+    
 }
 
 
