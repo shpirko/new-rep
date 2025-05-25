@@ -235,7 +235,7 @@ public class Manager {
             if (departments[i].getName().equals(name))
                 return;
         }
-        throw new DepartmentNotExistException("Department with name " + name + " already exists.");
+        throw new DepartmentNotExistException("Department with name " + name + " does not exist.");
     }
     
     public Department getDepartmentByName(String name) {

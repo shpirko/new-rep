@@ -293,6 +293,7 @@ public class Main {
    
     private static void asignLecturerToDepartment(){
         try {
+            
             System.out.println("Enter lecturer name: ");
             String lectName = s.nextLine();
             manager.isNotExistLecturer(lectName);
