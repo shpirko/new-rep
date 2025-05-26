@@ -350,16 +350,21 @@ public class Manager {
     }
 
     public int CompareLecturersbyPapers(Lecturer lecturer1, Lecturer lecturer2) {
-        if(lecturer1 instanceof Professor && lecturer2 instanceof Professor){
-            return ((Professor)lecturer1).getNumOfPapers() - ((Professor)lecturer2).getNumOfPapers();  
+        int papers1 = 0;
+        int papers2 = 0;
+        if (lecturer1 instanceof Professor) {
+            papers1 = ((Professor) lecturer1).getNumOfPapers();
+            System.out.println(papers1);
+        } else if (lecturer1 instanceof Doctor) {
+            papers1 = ((Doctor) lecturer1).getNumOfPapers();
         }
-        else if(lecturer1 instanceof Doctor && lecturer2 instanceof Doctor){
-            return ((Doctor)lecturer1).getNumOfPapers() - ((Doctor)lecturer2).getNumOfPapers();
+        
+        if (lecturer2 instanceof Professor) {
+            papers2 = ((Professor) lecturer2).getNumOfPapers();
+        } else if (lecturer2 instanceof Doctor) {
+            papers2 = ((Doctor) lecturer2).getNumOfPapers();
         }
-        else if(lecturer1 instanceof Professor && lecturer2 instanceof Doctor){
-            return ((Professor)lecturer1).getNumOfPapers() - ((Doctor)lecturer2).getNumOfPapers();
-        }
-        return ((Doctor)lecturer1).getNumOfPapers() - ((Professor)lecturer2).getNumOfPapers();
+        return papers1 - papers2;
     }
 }
 

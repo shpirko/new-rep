@@ -75,12 +75,11 @@ public class Main {
     }
 
     private static void testing(){
-        Professor newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PHD, 100);
-        newLecturer.setNumOfPapers(10);
-        System.out.println(newLecturer.getNumOfPapers());
+        Lecturer newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PHD, 100);
+        ((Professor) newLecturer).setNumOfPapers(10);
         manager.addLecturer(newLecturer);
-        Professor newLecturer2 = new Professor("stav", "2", "noa", DegreeLevel.PHD, 100);
-        newLecturer.setNumOfPapers(0);
+        Lecturer newLecturer2 = new Doctor("stav", "2", "noa", DegreeLevel.PHD, 100);
+        ((Doctor) newLecturer2).setNumOfPapers(23);
         manager.addLecturer(newLecturer2);
     }
 
