@@ -354,7 +354,6 @@ public class Manager {
         int papers2 = 0;
         if (lecturer1 instanceof Professor) {
             papers1 = ((Professor) lecturer1).getNumOfPapers();
-            System.out.println(papers1);
         } else if (lecturer1 instanceof Doctor) {
             papers1 = ((Doctor) lecturer1).getNumOfPapers();
         }
@@ -365,6 +364,42 @@ public class Manager {
             papers2 = ((Doctor) lecturer2).getNumOfPapers();
         }
         return papers1 - papers2;
+    }
+
+    public int compareByMembers(Committee com1, Committee com2) {
+        return com1.getNumOfMembers() - com2.getNumOfMembers();
+    }
+
+    public int totalCommitteePapers(Committee committee){
+        int total = 0 ;
+        Lecturer[] members = committee.getMembers();
+        if(members != null && members.length != 0){
+            for (int i =0; i < members.length; i ++){
+            if (members[i] instanceof Professor) {
+            total += ((Professor) members[i]).getNumOfPapers();
+        } else if (members[i] instanceof Doctor) {
+            total += ((Doctor) members[i]).getNumOfPapers();
+        }
+        }
+        }
+        return total;
+
+    }
+
+    public int compareByPapers(Committee com1, Committee com2) {
+        return totalCommitteePapers(com1) - totalCommitteePapers(com2);
+    }
+
+    public void duplicateCommittee(Committee committee) {
+        String name = committee.getName() + "-new";
+        Lecturer chair = committee.getChairman();
+        Lecturer[] members = committee.getMembers();
+        createCommittee(name, chair);
+        if(members != null && members.length != 0){
+            for (int i = 0; i < committee.getNumOfMembers(); i++){
+                asignLecturerToCommittee(members[i], getCommitteeByName(name));
+            }
+        }
     }
 }
 

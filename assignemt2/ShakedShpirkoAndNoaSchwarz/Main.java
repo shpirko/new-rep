@@ -19,9 +19,9 @@ public class Main {
         "Show All Committees Info",
         "Show All Info",
         "Compare Lecturers by Papers",
-        "testing", 
-        //, "Compare Committees", 
-        //, "Duplicate Committee"
+        "Compare Committees", 
+        "Duplicate Committee",
+        "testing"
     };
     
     private static Scanner s;
@@ -58,9 +58,9 @@ public class Main {
                 case 11 -> showAllCommitteesInfo();
                 case 12 -> showAll();
                 case 13 -> CompareLecturersbyPapers();
-                case 14 -> testing();
-                //case 13 -> compareCommittee();
-                //case 14 -> duplicateCommittee();
+                case 14 -> compareCommittee();
+                case 15 -> duplicateCommittee();
+                case 16 -> testing();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -75,16 +75,17 @@ public class Main {
     }
 
     private static void testing(){
-        Lecturer newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PHD, 100);
-        ((Professor) newLecturer).setNumOfPapers(10);
+        Lecturer newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PROFESSOR, 100);
+        // ((Professor) newLecturer).setNumOfPapers(10);
         manager.addLecturer(newLecturer);
         Lecturer newLecturer2 = new Doctor("stav", "2", "noa", DegreeLevel.PHD, 100);
-        ((Doctor) newLecturer2).setNumOfPapers(23);
+        // ((Doctor) newLecturer2).setNumOfPapers(23);
         manager.addLecturer(newLecturer2);
+        Lecturer newLecturer3 = new Professor("shaked", "3", "noa", DegreeLevel.BACHELOR, 100);
+        manager.addLecturer(newLecturer3);
     }
 
     private static void addLecturer() {
-        
         try{
             System.out.println("Enter lecturer name: ");
             String name = s.nextLine();
@@ -104,7 +105,6 @@ public class Main {
                 case 4 -> elevel = DegreeLevel.PROFESSOR;
                 default -> {System.out.println("Invalid number"); 
                 return;}
-
             }
             System.out.println("Enter salary: ");
             int salary = s.nextInt();
@@ -117,11 +117,9 @@ public class Main {
             System.out.println("press 1 to change the Lecturer name or 2 to return to menu");
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer (); 
             }
         }
-
     }
 
    private static void addDepartment() {
@@ -138,12 +136,9 @@ public class Main {
             System.out.println("press 1 to change the Department name or 2 to return to menu");
             if (s.nextInt() == 1) {   
               s.nextLine(); 
-             addDepartment ();
-                
-            }
-            
-        }
-        
+             addDepartment ();   
+            }  
+        } 
     }
 
     private static void addCommittee(){
@@ -165,16 +160,14 @@ public class Main {
             if (s.nextInt() == 1) {
                 s.nextLine(); 
                 addCommittee ();
-            }
-            
+            }  
         }
         catch (LecturerNotExistException e) {
             System.out.println(e.getMessage());
             System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer ();   
             }
         }
         catch (notProOrDocException e){
@@ -216,8 +209,7 @@ public class Main {
             System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer ();  
             }
         }
         catch (notProOrDocException e){
@@ -244,9 +236,6 @@ public class Main {
                 updateChairOfCommittee();
             }
         }
-        
-        
-        
     }
 
     private static void asignLecturerToCommittee()
@@ -270,8 +259,7 @@ public class Main {
             System.out.println("press 1 to add Committee or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addCommittee ();
-                
+                addCommittee ();  
             }
         }
         catch (LecturerNotExistException e) {
@@ -279,8 +267,7 @@ public class Main {
             System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer (); 
             }
         }
         catch (LecturrerAlreadyCairException e){
@@ -303,7 +290,6 @@ public class Main {
    
     private static void asignLecturerToDepartment(){
         try {
-            
             System.out.println("Enter lecturer name: ");
             String lectName = s.nextLine();
             manager.isNotExistLecturer(lectName);
@@ -321,8 +307,7 @@ public class Main {
             System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer ();   
             }
         }
         catch (DepartmentNotExistException e) {
@@ -330,8 +315,7 @@ public class Main {
             System.out.println("press 1 to add Department to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addDepartment ();
-                
+                addDepartment ();    
             }
         }
         catch (LecturrerInDepartmentException e) {
@@ -341,12 +325,7 @@ public class Main {
                 s.nextLine();
                 asignLecturerToDepartment();
             }
-        }
-
-
-        
-        
-        
+        } 
     }
    
     private static void removeLecturerFromCommittee() {
@@ -368,8 +347,7 @@ public class Main {
             System.out.println("press 1 to add Committee or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addCommittee ();
-                
+                addCommittee (); 
             }
         }
         catch (LecturerNotExistException e) {
@@ -377,8 +355,7 @@ public class Main {
             System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer (); 
             }
         }
         catch (LecturrerNotInCommitteeException e){
@@ -408,8 +385,7 @@ public class Main {
             System.out.println("press 1 to add Department to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addDepartment ();
-                
+                addDepartment ();  
             }
         }
     }
@@ -441,8 +417,7 @@ public class Main {
             System.out.println("press 1 to add lecturrer to do system or 2 to return to menu");;
             if (s.nextInt() == 1) {
                 s.nextLine(); 
-                addLecturer ();
-                
+                addLecturer ();  
             }
         }
         catch (notProOrDocException e){
@@ -452,8 +427,82 @@ public class Main {
                 s.nextLine();
                 CompareLecturersbyPapers();
             }
+        }       
+    }
+
+    private static void compareCommittee(){
+        try{
+        System.out.println("Enter committee name: ");
+        String comName1 = s.nextLine();
+        manager.isNotExistCommittee(comName1);
+        Committee com1 = manager.getCommitteeByName(comName1);
+        System.out.println("Enter another committee name: ");
+        String comName2 = s.nextLine();
+        manager.isNotExistCommittee(comName2);
+        Committee com2 = manager.getCommitteeByName(comName2);
+        System.out.println("To compare based on member count, press 1 and to compare by paper count, press 2: ");
+        int choice = s.nextInt();
+        s.nextLine();
+        if(choice == 1){
+            int compareResult = manager.compareByMembers(com1, com2);
+            if(compareResult>0){
+                System.out.println(comName1  + " has more members");
+            }
+            else if(compareResult<0){
+                System.out.println(comName2 + " has more papers members");
+            }
+            else{
+                System.out.println(comName1 + " and " + comName2 + " have the same number of members");
+            }
         }
-            
+        else if(choice == 2){
+            int compareResult = manager.compareByPapers(com1, com2);
+            if(compareResult>0){
+                System.out.println(comName1  + " has more papers published");
+            }
+            else if(compareResult<0){
+                System.out.println(comName2 + " has more papers published");
+            }
+            else{
+                System.out.println(comName1 + " and " + comName2 + " have the same number of papers published");
+            }
+        }
+        }
+        catch(CommitteeNotExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to add Committee or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addCommittee ();   
+            }
+        }
+    }
+
+    private static void duplicateCommittee(){
+        try{
+        System.out.println("Enter the name of the committee you want to duplicate: ");
+        String committee = s.nextLine();
+        manager.isNotExistCommittee(committee);
+        manager.isExistCommittee(committee + "-new");
+        manager.duplicateCommittee(manager.getCommitteeByName(committee));
+        System.out.println("Duplicate committee " + committee + "-new" + " has been created succssfully");
+        }
+        catch(CommitteeNotExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to add Committee or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                addCommittee ();   
+            }
+        }
+        catch(CommitteeExistException e) {
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry with a diffrent one or 2 to return to menu");;
+            if (s.nextInt() == 1) {
+                s.nextLine(); 
+                duplicateCommittee();  
+            }
+        } 
     }
 
     private static void showAllLecturersInfo(){
