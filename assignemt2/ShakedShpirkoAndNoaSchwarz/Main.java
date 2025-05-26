@@ -400,16 +400,11 @@ public class Main {
             String secondname = s.nextLine();
             manager.isNotExistLecturer(secondname);
             manager.notProOrDoc(manager.getLecturerByName(secondname));
-            int compareResult = manager.CompareLecturersbyPapers(manager.getLecturerByName(firstname),manager.getLecturerByName(secondname));
-            if(compareResult>0){
-                System.out.println(firstname + " has more papers published");
-            }
-            else if(compareResult<0){
-                System.out.println(secondname + " has more papers published");
-            }
-            else{
-                System.out.println(firstname + " and " + secondname + " have the same number of papers published");
-            }
+            Doctor firstLecturer = (Doctor) manager.getLecturerByName(firstname);
+            Doctor secondLecturer = (Doctor) manager.getLecturerByName(secondname);
+            System.out.println(manager.CompareDoctorsbyPapers(firstLecturer, secondLecturer));
+
+            
         }
         catch(LecturerNotExistException e)
         {
@@ -443,31 +438,15 @@ public class Main {
         System.out.println("To compare based on member count, press 1 and to compare by paper count, press 2: ");
         int choice = s.nextInt();
         s.nextLine();
-        if(choice == 1){
-            int compareResult = manager.compareByMembers(com1, com2);
-            if(compareResult>0){
-                System.out.println(comName1  + " has more members");
-            }
-            else if(compareResult<0){
-                System.out.println(comName2 + " has more papers members");
-            }
-            else{
-                System.out.println(comName1 + " and " + comName2 + " have the same number of members");
-            }
-        }
-        else if(choice == 2){
-            int compareResult = manager.compareByPapers(com1, com2);
-            if(compareResult>0){
-                System.out.println(comName1  + " has more papers published");
-            }
-            else if(compareResult<0){
-                System.out.println(comName2 + " has more papers published");
-            }
-            else{
-                System.out.println(comName1 + " and " + comName2 + " have the same number of papers published");
-            }
+        if (choice == 1) {
+            System.out.println(manager.compareByMembers(com1, com2));
+        } else if (choice == 2) {
+            System.out.println(manager.compareByPapers(com1, com2));
+        } else {
+            System.out.println("Invalid choice");
         }
         }
+        
         catch(CommitteeNotExistException e) {
             System.out.println(e.getMessage());
             System.out.println("press 1 to add Committee or 2 to return to menu");;

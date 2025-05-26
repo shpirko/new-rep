@@ -349,45 +349,56 @@ public class Manager {
             
     }
 
-    public int CompareLecturersbyPapers(Lecturer lecturer1, Lecturer lecturer2) {
+    public String CompareDoctorsbyPapers(Doctor lecturer1, Doctor lecturer2) {
+        if (lecturer1.getNumOfPapers() > lecturer2.getNumOfPapers()) 
+            return lecturer1.getName() + " has more papers than " + lecturer2.getName();
+
+        if (lecturer1.getNumOfPapers() < lecturer2.getNumOfPapers()) 
+            return lecturer2.getName() + " has more papers than " + lecturer1.getName();
+
+        return lecturer1.getName() + " and " + lecturer2.getName() + " have the same number of papers.";
+        
+    }
+    
+
+    public String compareByMembers(Committee com1, Committee com2) {
+        int members1 = com1.getNumOfMembers();
+        int members2 = com2.getNumOfMembers();
+        
+        if (members1 > members2) {
+            return com1.getName() + " has more members than " + com2.getName();
+        } else if (members1 < members2) {
+            return com2.getName() + " has more members than " + com1.getName();
+        } else {
+            return com1.getName() + " and " + com2.getName() + " have the same number of members.";
+        }
+    }
+
+    
+
+    public String compareByPapers(Committee com1, Committee com2) {
         int papers1 = 0;
         int papers2 = 0;
-        if (lecturer1 instanceof Professor) {
-            papers1 = ((Professor) lecturer1).getNumOfPapers();
-        } else if (lecturer1 instanceof Doctor) {
-            papers1 = ((Doctor) lecturer1).getNumOfPapers();
-        }
-        
-        if (lecturer2 instanceof Professor) {
-            papers2 = ((Professor) lecturer2).getNumOfPapers();
-        } else if (lecturer2 instanceof Doctor) {
-            papers2 = ((Doctor) lecturer2).getNumOfPapers();
-        }
-        return papers1 - papers2;
-    }
 
-    public int compareByMembers(Committee com1, Committee com2) {
-        return com1.getNumOfMembers() - com2.getNumOfMembers();
-    }
-
-    public int totalCommitteePapers(Committee committee){
-        int total = 0 ;
-        Lecturer[] members = committee.getMembers();
-        if(members != null && members.length != 0){
-            for (int i =0; i < members.length; i ++){
-            if (members[i] instanceof Professor) {
-            total += ((Professor) members[i]).getNumOfPapers();
-        } else if (members[i] instanceof Doctor) {
-            total += ((Doctor) members[i]).getNumOfPapers();
+        for (int i = 0; i < com1.getNumOfMembers(); i++) {
+            if (com1.getMembers()[i] instanceof Doctor) {
+                papers1 += ((Doctor) com1.getMembers()[i]).getNumOfPapers();
+            }
         }
-        }
-        }
-        return total;
 
-    }
+        for (int i = 0; i < com2.getNumOfMembers(); i++) {
+            if (com2.getMembers()[i] instanceof Doctor) {
+                papers2 += ((Doctor) com2.getMembers()[i]).getNumOfPapers();
+            }
+        }
 
-    public int compareByPapers(Committee com1, Committee com2) {
-        return totalCommitteePapers(com1) - totalCommitteePapers(com2);
+        if (papers1 > papers2) {
+            return com1.getName() + " has more papers than " + com2.getName();
+        } else if (papers1 < papers2) {
+            return com2.getName() + " has more papers than " + com1.getName();
+        } else {
+            return com1.getName() + " and " + com2.getName() + " have the same number of papers.";
+        }
     }
 
     public void duplicateCommittee(Committee committee) {

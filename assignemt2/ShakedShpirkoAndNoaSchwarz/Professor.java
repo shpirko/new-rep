@@ -1,11 +1,11 @@
 package ShakedShpirkoAndNoaSchwarz;
 
-public class Professor extends Lecturer {
+public class Professor extends Doctor {
     private String nameOfInstitution; 
     private String[] PublishedPapers; 
     private int numOfPapers; 
 
-    public Professor(String name, String id, String degreeName, DegreeLevel degreeLevel, int salary) {
+    public Professor (String name, String id, String degreeName, DegreeLevel degreeLevel, int salary) {
         super(name, id, degreeName, degreeLevel, salary);
         
     }
@@ -21,20 +21,8 @@ public class Professor extends Lecturer {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Professor: ").append(super.toString()).append(", Name of Institution: ").append(nameOfInstitution)
-                .append(", Number of Papers: ").append(numOfPapers).append(", Published Papers: ");
-        if (numOfPapers > 0) {
-            sb.append("[");
-            for (int i = 0; i < numOfPapers; i++) {
-                sb.append(PublishedPapers[i]);
-                if (i < numOfPapers - 1) {
-                    sb.append(", ");
-                }
-            }
-            sb.append("]");
-        } else {
-            sb.append("null");
-        }
+        sb.append(super.toString()).append("Name of Institution: ").append(nameOfInstitution);
+        sb.append("\n");
         return sb.toString();
     }
 
@@ -42,25 +30,12 @@ public class Professor extends Lecturer {
         return nameOfInstitution;
     }
 
-    public String[] getPublishedPapers() {
-        return PublishedPapers;
-    }
-
-    public int getNumOfPapers() {
-        return numOfPapers;
-    }
-
+    
     public void setNameOfInstitution(String nameOfInstitution) {
         this.nameOfInstitution = nameOfInstitution;
     }
 
-    public void setPublishedPapers(String[] publishedPapers) {
-        PublishedPapers = publishedPapers;
-    }
 
-    public void setNumOfPapers(int numOfPapers) {
-        this.numOfPapers = numOfPapers;
-    }
 
     
 

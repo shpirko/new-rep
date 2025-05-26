@@ -132,7 +132,7 @@ public class Lecturer {
     } else {
         sb.append("null\n");
     }
-    sb.append("--------------------------------------------------");
+    
     return sb.toString();
 }
 

@@ -8,6 +8,27 @@ public class Doctor extends Lecturer {
         
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append("Number of Published Papers: ").append(numOfPapers).append("\n");
+        sb.append("Published Papers: ").append("\n");
+        if (numOfPapers > 0) {
+            sb.append("[");
+            for (int i = 0; i < numOfPapers; i++) {
+                sb.append(PublishedPapers[i]);
+                if (i < numOfPapers - 1) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("]");
+        } else {
+            sb.append("null");
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
     
 
     @Override
