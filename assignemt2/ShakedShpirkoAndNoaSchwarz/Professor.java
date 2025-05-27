@@ -25,7 +25,7 @@ public class Professor extends Doctor {
         sb.append("\n");
         return sb.toString();
     }
-
+    
     public String getNameOfInstitution() {
         return nameOfInstitution;
     }

@@ -1,6 +1,6 @@
 package ShakedShpirkoAndNoaSchwarz;
 
-public class Committee {
+public class Committee implements Cloneable{
     private String name; 
     private Lecturer[] members; // Array of Lecturer objects
     private int numOfMembers; // Number of members in the committee

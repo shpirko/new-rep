@@ -350,51 +350,33 @@ public class Manager {
     }
 
     public String CompareDoctorsbyPapers(Doctor lecturer1, Doctor lecturer2) {
-        if (lecturer1.getNumOfPapers() > lecturer2.getNumOfPapers()) 
+        if (lecturer1.compareTo(lecturer2) > 0) 
             return lecturer1.getName() + " has more papers than " + lecturer2.getName();
 
-        if (lecturer1.getNumOfPapers() < lecturer2.getNumOfPapers()) 
+        if (lecturer1.compareTo(lecturer2) < 0) 
             return lecturer2.getName() + " has more papers than " + lecturer1.getName();
 
         return lecturer1.getName() + " and " + lecturer2.getName() + " have the same number of papers.";
         
     }
-    
 
     public String compareByMembers(Committee com1, Committee com2) {
-        int members1 = com1.getNumOfMembers();
-        int members2 = com2.getNumOfMembers();
-        
-        if (members1 > members2) {
+        CompareByCommitteeMembers comparator = new CompareByCommitteeMembers();
+        if (comparator.compare(com1, com2) > 0) {
             return com1.getName() + " has more members than " + com2.getName();
-        } else if (members1 < members2) {
+        } else if (comparator.compare(com1, com2) < 0) {
             return com2.getName() + " has more members than " + com1.getName();
         } else {
             return com1.getName() + " and " + com2.getName() + " have the same number of members.";
         }
     }
 
-    
-
     public String compareByPapers(Committee com1, Committee com2) {
-        int papers1 = 0;
-        int papers2 = 0;
+        CompareByCommitteePapers comparator = new CompareByCommitteePapers();
 
-        for (int i = 0; i < com1.getNumOfMembers(); i++) {
-            if (com1.getMembers()[i] instanceof Doctor) {
-                papers1 += ((Doctor) com1.getMembers()[i]).getNumOfPapers();
-            }
-        }
-
-        for (int i = 0; i < com2.getNumOfMembers(); i++) {
-            if (com2.getMembers()[i] instanceof Doctor) {
-                papers2 += ((Doctor) com2.getMembers()[i]).getNumOfPapers();
-            }
-        }
-
-        if (papers1 > papers2) {
+        if (comparator.compare(com1, com2) > 0) {
             return com1.getName() + " has more papers than " + com2.getName();
-        } else if (papers1 < papers2) {
+        } else if (comparator.compare(com1, com2) < 0) {
             return com2.getName() + " has more papers than " + com1.getName();
         } else {
             return com1.getName() + " and " + com2.getName() + " have the same number of papers.";

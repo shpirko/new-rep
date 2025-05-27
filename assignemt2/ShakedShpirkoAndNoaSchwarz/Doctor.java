@@ -1,5 +1,5 @@
 package ShakedShpirkoAndNoaSchwarz;
-public class Doctor extends Lecturer {
+public class Doctor extends Lecturer implements Comparable{
     private String[] PublishedPapers; // Array of published papers
     private int numOfPapers; // Number of papers published by the doctor
     
@@ -47,6 +47,12 @@ public class Doctor extends Lecturer {
             System.arraycopy(PublishedPapers, 0, newPublishedPapers, 0, numOfPapers);
             PublishedPapers = newPublishedPapers;
         }
+    }
+
+    @Override
+    public int compareTo(Object o) {
+            Doctor otherDoctor = (Doctor) o;
+            return Integer.compare(this.numOfPapers, otherDoctor.numOfPapers); 
     }
 
     public String[] getPublishedPapers() {
