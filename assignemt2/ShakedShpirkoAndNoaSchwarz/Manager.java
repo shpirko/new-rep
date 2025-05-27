@@ -383,14 +383,18 @@ public class Manager {
         }
     }
 
-    public void duplicateCommittee(Committee committee) {
-        String name = committee.getName() + "-new";
-        Lecturer chair = committee.getChairman();
-        Lecturer[] members = committee.getMembers();
-        createCommittee(name, chair);
-        if(members != null && members.length != 0){
-            for (int i = 0; i < committee.getNumOfMembers(); i++){
-                asignLecturerToCommittee(members[i], getCommitteeByName(name));
+    public void duplicateCommittee(Committee committee) throws CloneNotSupportedException{
+        Committee clonedCommittee = committee.clone();
+        clonedCommittee.setName(committee.getName() + "-new");
+
+        Lecturer clonedChair = clonedCommittee.getChairman();
+        Lecturer[] clonedMembers = clonedCommittee.getMembers();
+
+        createCommittee(clonedCommittee.getName(), clonedChair);
+
+        if (clonedMembers != null && clonedMembers.length != 0) {
+            for (Lecturer member : clonedMembers) {
+                asignLecturerToCommittee(member, getCommitteeByName(clonedCommittee.getName()));
             }
         }
     }

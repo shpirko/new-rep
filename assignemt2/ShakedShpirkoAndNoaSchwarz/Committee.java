@@ -39,6 +39,14 @@ public class Committee implements Cloneable{
         this.members = members;
     }
 
+     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Lecturer getChair() {
+        return chair;
+    }
+
     public String getCommitteeMembersNames() {
         String names = "";
         for (int i = 0; i < numOfMembers; i++) {
@@ -56,6 +64,19 @@ public class Committee implements Cloneable{
         if (obj == null || getClass() != obj.getClass()) return false;
         Committee committee = (Committee) obj;
         return name.equals(committee.name);
+    }
+
+    @Override
+    protected Committee clone() throws CloneNotSupportedException{
+        Committee cloned = (Committee) super.clone();
+        cloned.chair = (Lecturer) chair.clone();
+        if (members != null) {
+            cloned.members = new Lecturer[members.length];
+            for (int i = 0; i < members.length; i++) {
+                cloned.members[i] = (Lecturer) members[i].clone();
+            }
+        }
+        return cloned;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ShakedShpirkoAndNoaSchwarz;
 
-public class Lecturer {
+public class Lecturer implements Cloneable{
     public enum DegreeLevel {
         BACHELOR("Bachelor"), 
         MASTER("Master"), 
@@ -108,6 +108,11 @@ public class Lecturer {
 
     public void setCommittees(Committee[] committees) {
         this.committees = committees;
+    }
+
+    @Override
+    protected Lecturer clone() throws CloneNotSupportedException{
+        return (Lecturer) super.clone();
     }
 
     @Override

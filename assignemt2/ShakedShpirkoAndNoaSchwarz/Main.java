@@ -76,7 +76,7 @@ public class Main {
 
     private static void testing(){
         Lecturer newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PROFESSOR, 100);
-        ((Professor) newLecturer).setNumOfPapers(10);
+        // ((Professor) newLecturer).setNumOfPapers(10);
         manager.addLecturer(newLecturer);
         Lecturer newLecturer2 = new Doctor("stav", "2", "noa", DegreeLevel.PHD, 100);
         // ((Doctor) newLecturer2).setNumOfPapers(23);
@@ -481,7 +481,10 @@ public class Main {
                 s.nextLine(); 
                 duplicateCommittee();  
             }
-        } 
+        }
+        catch (CloneNotSupportedException e) {
+            System.out.println("Cannot clone committee, returning to menu");
+        }
     }
 
     private static void showAllLecturersInfo(){
