@@ -69,12 +69,9 @@ public class Committee implements Cloneable{
     @Override
     protected Committee clone() throws CloneNotSupportedException{
         Committee cloned = (Committee) super.clone();
-        cloned.chair = (Lecturer) chair.clone();
+        cloned.chair = this.chair;
         if (members != null) {
-            cloned.members = new Lecturer[members.length];
-            for (int i = 0; i < members.length; i++) {
-                cloned.members[i] = (Lecturer) members[i].clone();
-            }
+            cloned.members = this.members.clone();
         }
         return cloned;
     }
