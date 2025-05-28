@@ -68,8 +68,8 @@ public class Manager {
         }
     }
     
-    public void updateChairOfCommittee(Committee commiitte, Lecturer newChair) {
-        commiitte.setChair(newChair);
+    public void updateChairOfCommittee(Committee committee, Lecturer newChair) {
+        committee.setChair(newChair);
     }
     
     public void removeLecturerFromDepartment(Lecturer lecturer, Department department) {
@@ -393,8 +393,8 @@ public class Manager {
         createCommittee(clonedCommittee.getName(), clonedChair);
 
         if (clonedMembers != null && clonedMembers.length != 0) {
-            for (Lecturer member : clonedMembers) {
-                asignLecturerToCommittee(member, getCommitteeByName(clonedCommittee.getName()));
+            for (int i = 0; i < committee.getNumOfMembers(); i++) {
+                asignLecturerToCommittee(clonedMembers[i], getCommitteeByName(clonedCommittee.getName()));
             }
         }
     }
