@@ -150,7 +150,7 @@ public class Main {
             String chairName = s.nextLine();
             manager.isNotExistLecturer(chairName);
             Lecturer chair = manager.getLecturerByName(chairName);
-            manager.notProOrDoc(chair);
+            manager.notDoc(chair);
             manager.createCommittee(name, chair);
             System.out.println("Committee added successfully!");
         }
@@ -170,7 +170,7 @@ public class Main {
                 addLecturer ();   
             }
         }
-        catch (notProOrDocException e){
+        catch (notDoctorException e){
             System.out.println(e.getMessage());
             System.out.println("press 1 to retry or 2 to return to menu");  
             if (s.nextInt() == 1) {
@@ -190,7 +190,7 @@ public class Main {
             String chairName = s.nextLine();
             manager.isNotExistLecturer(chairName);
             Lecturer chair = manager.getLecturerByName(chairName);
-            manager.notProOrDoc(chair);
+            manager.notDoc(chair);
             manager.isLecturrerInCommittee(chair, com);
             manager.isChairAlreadyChairOfCommittee(chair, com);
             manager.updateChairOfCommittee(com, chair);
@@ -212,7 +212,7 @@ public class Main {
                 addLecturer ();  
             }
         }
-        catch (notProOrDocException e){
+        catch (notDoctorException e){
             System.out.println(e.getMessage());
             System.out.println("press 1 to retry or 2 to return to menu");  
             if (s.nextInt() == 1) {
@@ -395,11 +395,11 @@ public class Main {
             System.out.println("Enter first Doctor / Professor name: ");
             String firstname = s.nextLine();
             manager.isNotExistLecturer(firstname);
-            manager.notProOrDoc(manager.getLecturerByName(firstname));
+            manager.notDoc(manager.getLecturerByName(firstname));
             System.out.println("Enter first Doctor / Professor name: ");
             String secondname = s.nextLine();
             manager.isNotExistLecturer(secondname);
-            manager.notProOrDoc(manager.getLecturerByName(secondname));
+            manager.notDoc(manager.getLecturerByName(secondname));
             Doctor firstLecturer = (Doctor) manager.getLecturerByName(firstname);
             Doctor secondLecturer = (Doctor) manager.getLecturerByName(secondname);
             System.out.println(manager.CompareDoctorsbyPapers(firstLecturer, secondLecturer));
@@ -415,7 +415,7 @@ public class Main {
                 addLecturer ();  
             }
         }
-        catch (notProOrDocException e){
+        catch (notDoctorException e){
             System.out.println(e.getMessage());
             System.out.println("press 1 to retry or 2 to return to menu");  
             if (s.nextInt() == 1) {

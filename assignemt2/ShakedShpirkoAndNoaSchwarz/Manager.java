@@ -316,10 +316,10 @@ public class Manager {
         return info.toString();
     }
     
-    public void notProOrDoc(Lecturer lecturer) throws notProOrDocException
+    public void notDoc(Lecturer lecturer) throws notDoctorException
     {
-        if(!(lecturer instanceof Professor || lecturer instanceof Doctor))
-            throw new notProOrDocException("Lecturer " + lecturer.getName() + " is not a Professor or Doctor.");
+        if(!(lecturer instanceof Doctor))
+            throw new notDoctorException("Lecturer " + lecturer.getName() + " is not a  Doctor.");
     }
 
     public String allInfo() {
