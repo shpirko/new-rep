@@ -322,7 +322,7 @@ public class Manager {
             throw new notDoctorException("Lecturer " + lecturer.getName() + " is not a  Doctor.");
     }
 
-    public String allInfo() {
+    /*public String allInfo() {
         StringBuilder sb = new StringBuilder();
         sb.append("College Name: ").append(collegeName).append("\n");
         sb.append("Number of Lecturers: ").append(numOfLecturers).append("\n");
@@ -341,7 +341,7 @@ public class Manager {
             sb.append(committees[i].toString()).append("\n");
         }
         return sb.toString();
-    }
+    }*/
 
     public void isChairAlreadyChairOfCommittee(Lecturer chair, Committee com) throws LecturrerAlreadyCairException {
         if (com.getChairman().equals(chair)) 

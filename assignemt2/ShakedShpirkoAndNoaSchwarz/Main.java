@@ -17,11 +17,9 @@ public class Main {
         "Show Average Salary of Lecturers in Department",
         "Show All Lecturers Info",
         "Show All Committees Info",
-        "Show All Info",
         "Compare Lecturers by Papers",
         "Compare Committees", 
-        "Duplicate Committee",
-        "testing"
+        "Duplicate Committee"
     };
     
     private static Scanner s;
@@ -56,11 +54,9 @@ public class Main {
                 case 9 -> showAverageSalaryOfLecturersInDepartment();
                 case 10 -> showAllLecturersInfo();
                 case 11 -> showAllCommitteesInfo();
-                case 12 -> showAll();
-                case 13 -> CompareLecturersbyPapers();
-                case 14 -> compareCommittee();
-                case 15 -> duplicateCommittee();
-                case 16 -> testing();
+                case 12 -> CompareLecturersbyPapers();
+                case 13 -> compareCommittee();
+                case 14 -> duplicateCommittee();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -74,7 +70,7 @@ public class Main {
         s.close();
     }
 
-    private static void testing(){
+    /*private static void testing(){
         Lecturer newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PROFESSOR, 100);
         ((Professor) newLecturer).setNumOfPapers(10);
         manager.addLecturer(newLecturer);
@@ -83,7 +79,7 @@ public class Main {
         manager.addLecturer(newLecturer2);
         Lecturer newLecturer3 = new Lecturer("shaked", "3", "noa", DegreeLevel.BACHELOR, 100);
         manager.addLecturer(newLecturer3);
-    }
+    }*/
 
     private static void addLecturer() {
         try{
@@ -500,10 +496,6 @@ public class Main {
 
     }
 
-    private static void showAll() {
-        System.out.println("--------------------------------------------------");
-        System.out.println("Presenting all info: ");
-        System.out.println(manager.allInfo());
-    }
+    
 
 }
