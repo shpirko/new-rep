@@ -19,7 +19,8 @@ public class Main {
         "Show All Committees Info",
         "Compare Lecturers by Papers",
         "Compare Committees", 
-        "Duplicate Committee"
+        "Duplicate Committee",
+        "Test System"
     };
     
     private static Scanner s;
@@ -57,6 +58,7 @@ public class Main {
                 case 12 -> CompareLecturersbyPapers();
                 case 13 -> compareCommittee();
                 case 14 -> duplicateCommittee();
+                case 15 -> testSystem();
                 default -> System.out.println("Incorrect input, please try again");
             }
         } while (userChosenNum != 0);
@@ -69,6 +71,69 @@ public class Main {
         run();
         s.close();
     }
+
+    private static void testSystem() {
+    System.out.println("=== Running Automated Tests ===");
+
+    // Add Departments
+    manager.createDepartment("Computer Science");
+    manager.createDepartment("Mathematics");
+
+    // Add Lecturers
+    manager.createLecturer("Alice", "111", "CS", DegreeLevel.BACHELOR, 10000);
+    manager.createLecturer("Bob", "222", "Math", DegreeLevel.PHD, 12000);
+    manager.createLecturer("Carol", "333", "CS", DegreeLevel.PROFESSOR, 15000);
+
+    // Assign Lecturers to Departments
+    manager.asignLecturerToDepartment(manager.getLecturerByName("Alice"), manager.getDepartmentByName("Computer Science"));
+    manager.asignLecturerToDepartment(manager.getLecturerByName("Bob"), manager.getDepartmentByName("Mathematics"));
+    manager.asignLecturerToDepartment(manager.getLecturerByName("Carol"), manager.getDepartmentByName("Computer Science"));
+
+    // Add Committees
+    manager.createCommittee("Research", manager.getLecturerByName("Bob"));
+    manager.createCommittee("Events", manager.getLecturerByName("Carol"));
+
+    // Assign Lecturers to Committees
+    manager.asignLecturerToCommittee(manager.getLecturerByName("Alice"), manager.getCommitteeByName("Research"));
+    manager.asignLecturerToCommittee(manager.getLecturerByName("Carol"), manager.getCommitteeByName("Research"));
+    manager.asignLecturerToCommittee(manager.getLecturerByName("Bob"), manager.getCommitteeByName("Events"));
+
+    // Add published papers to Doctor/Professor
+    Doctor bob = (Doctor) manager.getLecturerByName("Bob");
+    bob.addPublishedPaper("Paper 1");
+    bob.addPublishedPaper("Paper 2");
+    Professor carol = (Professor) manager.getLecturerByName("Carol");
+    carol.addPublishedPaper("Paper A");
+
+    // Show all lecturers
+    showAllLecturersInfo();
+
+    // Show all committees
+    showAllCommitteesInfo();
+
+    // Show average salary
+    showAverageSalaryOfAllLecturers();
+
+    // Show average salary in department
+    System.out.println(manager.calcAvgDep(manager.getDepartmentByName("Computer Science")));
+
+    // Compare lecturers by papers
+    System.out.println(manager.CompareDoctorsbyPapers(bob, carol));
+
+    // Compare committees by members
+    System.out.println(manager.compareByMembers(manager.getCommitteeByName("Research"), manager.getCommitteeByName("Events")));
+
+    // Duplicate a committee
+    try {
+        manager.duplicateCommittee(manager.getCommitteeByName("Research"));
+        System.out.println("Duplicated committee info:");
+        System.out.println(manager.getCommitteeByName("Research-new"));
+    } catch (Exception e) {
+        System.out.println("Error duplicating committee: " + e.getMessage());
+    }
+
+    System.out.println("=== Automated Tests Complete ===");
+}
 
     
 
