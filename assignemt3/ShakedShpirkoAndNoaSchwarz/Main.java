@@ -70,16 +70,7 @@ public class Main {
         s.close();
     }
 
-    /*private static void testing(){
-        Lecturer newLecturer = new Professor("noa", "1", "noa", DegreeLevel.PROFESSOR, 100);
-        ((Professor) newLecturer).setNumOfPapers(10);
-        manager.addLecturer(newLecturer);
-        Lecturer newLecturer2 = new Doctor("stav", "2", "noa", DegreeLevel.PHD, 100);
-        ((Doctor) newLecturer2).setNumOfPapers(23);
-        manager.addLecturer(newLecturer2);
-        Lecturer newLecturer3 = new Lecturer("shaked", "3", "noa", DegreeLevel.BACHELOR, 100);
-        manager.addLecturer(newLecturer3);
-    }*/
+    
 
     private static void addLecturer() {
         try{

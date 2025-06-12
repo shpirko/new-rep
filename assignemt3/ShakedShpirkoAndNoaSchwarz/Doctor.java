@@ -1,78 +1,64 @@
 package ShakedShpirkoAndNoaSchwarz;
-public class Doctor extends Lecturer implements Comparable{
-    private String[] PublishedPapers; // Array of published papers
-    private int numOfPapers; // Number of papers published by the doctor
-    
-    public Doctor (String name, String id, String degreeName, DegreeLevel degreeLevel, int salary) {
+
+import java.util.ArrayList;
+
+public class Doctor extends Lecturer implements Comparable<Doctor> {
+    private ArrayList<String> publishedPapers;
+
+    public Doctor(String name, String id, String degreeName, DegreeLevel degreeLevel, int salary) {
         super(name, id, degreeName, degreeLevel, salary);
-        
+        this.publishedPapers = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
-        sb.append("Number of Published Papers: ").append(numOfPapers).append("\n");
-        sb.append("Published Papers: ").append("\n");
-        if (numOfPapers > 0) {
-            sb.append("[");
-            for (int i = 0; i < numOfPapers; i++) {
-                sb.append(PublishedPapers[i]);
-                if (i < numOfPapers - 1) {
+        sb.append("Published Papers: ");
+        if (!publishedPapers.isEmpty()) {
+            for (int i = 0; i < publishedPapers.size(); i++) {
+                sb.append(publishedPapers.get(i));
+                if (i < publishedPapers.size() - 1) {
                     sb.append(", ");
                 }
             }
-            sb.append("]");
+            sb.append("\n");
         } else {
-            sb.append("null");
+            sb.append("null\n");
         }
-        sb.append("\n");
         return sb.toString();
     }
-    
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Doctor doctor = (Doctor) obj;
-        return super.equals(obj) && numOfPapers == doctor.numOfPapers;
+        return super.equals(obj) && publishedPapers.equals(doctor.publishedPapers);
     }
 
     public void addPublishedPaper(String paper) {
-        if (numOfPapers == 0) {
-            PublishedPapers = new String[2];
-        } else {
-            String[] newPublishedPapers = new String[numOfPapers + 1];
-            System.arraycopy(PublishedPapers, 0, newPublishedPapers, 0, numOfPapers);
-            PublishedPapers = newPublishedPapers;
+        if (paper != null && !paper.isEmpty() && !publishedPapers.contains(paper)) {
+            publishedPapers.add(paper);
         }
     }
 
     @Override
-    public int compareTo(Object o) {
-            Doctor otherDoctor = (Doctor) o;
-            return Integer.compare(this.numOfPapers, otherDoctor.numOfPapers); 
+    public int compareTo(Doctor other) {
+        return Integer.compare(this.publishedPapers.size(), other.publishedPapers.size());
     }
 
-    public String[] getPublishedPapers() {
-        return PublishedPapers;
+    public ArrayList<String> getPublishedPapers() {
+        return publishedPapers;
+    }
+
+    public void setPublishedPapers(ArrayList<String> publishedPapers) {
+        this.publishedPapers = publishedPapers;
     }
 
     public int getNumOfPapers() {
-        return numOfPapers;
+        return publishedPapers.size();
     }
-
-    public void setPublishedPapers(String[] publishedPapers) {
-        PublishedPapers = publishedPapers;
-    }
-
-
-    public void setNumOfPapers(int numOfPapers) {
-        this.numOfPapers = numOfPapers;
-    }
-
-    
 }
 
 

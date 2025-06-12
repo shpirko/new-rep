@@ -1,45 +1,23 @@
 package ShakedShpirkoAndNoaSchwarz;
 
-public class Committee implements Cloneable{
-    private String name; 
-    private Lecturer[] members; // Array of Lecturer objects
-    private int numOfMembers; // Number of members in the committee
-    private Lecturer chair; // Chair of the committee
+import java.util.ArrayList;
+
+public class Committee implements Cloneable {
+    private String name;
+    private Lecturer chair;
+    private ArrayList<Lecturer> members;
 
     public Committee(String name, Lecturer chair) {
         this.name = name;
         this.chair = chair;
+        this.members = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public Lecturer getChairman() {
-        return chair;
-    }
-
-    public int getNumOfMembers() {
-        return numOfMembers;
-    }
-
-    public Lecturer[] getMembers() {
-        return members;
-    }
-
-    public void setChair(Lecturer chair) {
-        this.chair = chair;
-    }
-
-    public void setNumOfMembers(int numOfMembers) {
-        this.numOfMembers = numOfMembers;
-    }
-
-    public void setMembers(Lecturer[] members) {
-        this.members = members;
-    }
-
-     public void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -47,56 +25,71 @@ public class Committee implements Cloneable{
         return chair;
     }
 
-    public String getCommitteeMembersNames() {
-        String names = "";
-        for (int i = 0; i < numOfMembers; i++) {
-            names += members[i].getName();
-            if (i < numOfMembers - 1) {
-                names += ", ";
-            }
-        }
-        return names;
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Committee committee = (Committee) obj;
-        return name.equals(committee.name);
+    public void setChair(Lecturer chair) {
+        this.chair = chair;
     }
 
-    @Override
-    protected Committee clone() throws CloneNotSupportedException{
-        Committee cloned = (Committee) super.clone();
-        cloned.chair = this.chair;
-        if (members != null) {
-            cloned.members = this.members.clone();
+    public ArrayList<Lecturer> getMembers() {
+        return members;
+    }
+
+    public void setMembers(ArrayList<Lecturer> members) {
+        this.members = members;
+    }
+
+    public int getNumOfMembers() {
+        return members.size();
+    }
+
+    public void addMember(Lecturer lecturer) {
+        if (!members.contains(lecturer)) {
+            members.add(lecturer);
         }
+    }
+
+    public void removeMember(Lecturer lecturer) {
+        members.remove(lecturer);
+    }
+
+    
+
+    @Override
+    public Committee clone() throws CloneNotSupportedException {
+        Committee cloned = (Committee) super.clone();
+        cloned.members = new ArrayList<>(this.members);
+        cloned.chair = this.chair;
         return cloned;
     }
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("name: ").append(name).append("\n");
-    sb.append("chair: ").append(chair != null ? chair.getName() : "null").append("\n");
-    sb.append("numOfMembers: ").append(numOfMembers).append("\n");
-    sb.append("members: ");
-    if (members != null && numOfMembers > 0) {
-        for (int i = 0; i < numOfMembers; i++) {
-            sb.append(members[i].getName());
-            if (i < numOfMembers - 1) {
-                sb.append(", ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("name: ").append(name).append("\n");
+        sb.append("chair: ").append(chair != null ? chair.getName() : "null").append("\n");
+        sb.append("numOfMembers: ").append(getNumOfMembers()).append("\n");
+        sb.append("members: ");
+        if (members != null && !members.isEmpty()) {
+            for (int i = 0; i < members.size(); i++) {
+                sb.append(members.get(i).getName());
+                if (i < members.size() - 1) {
+                    sb.append(", ");
+                }
             }
+            sb.append("\n");
+        } else {
+            sb.append("null\n");
         }
-        sb.append("\n");
-    } else {
-        sb.append("null\n");
+        sb.append("--------------------------------------------------");
+        return sb.toString();
     }
-    sb.append("--------------------------------------------------");
-    return sb.toString();
-}
-    
-   
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Committee committee = (Committee) obj;
+        return name.equals(committee.name) &&
+               chair.equals(committee.chair) &&
+               members.equals(committee.members);
+    }
 }

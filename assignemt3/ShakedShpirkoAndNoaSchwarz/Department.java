@@ -1,63 +1,72 @@
 package ShakedShpirkoAndNoaSchwarz;
 
+import java.util.ArrayList;
+
 public class Department {
-    private String name; 
-    private int numOfStudents;
-    Lecturer[] lecturers; // Array of Lecturer objects
-    private int numOfLecturers; // Number of lecturers in the department
+    private String name;
+    private ArrayList<Lecturer> lecturers;
 
     public Department(String name) {
         this.name = name;
+        this.lecturers = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public int getNumOfLecturers() {
-        return numOfLecturers;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNumOfMembers(int numOfLecturers) {
-        this.numOfLecturers = numOfLecturers;
-    }
-
-    public Lecturer[] getLecturers() {
+    public ArrayList<Lecturer> getLecturers() {
         return lecturers;
     }
 
-    public void setLecturers(Lecturer[] lecturers) {
+    public void setLecturers(ArrayList<Lecturer> lecturers) {
         this.lecturers = lecturers;
     }
 
+    public int getNumOfLecturers() {
+        return lecturers.size();
+    }
+
+    public void addLecturer(Lecturer lecturer) {
+        if (!lecturers.contains(lecturer)) {
+            lecturers.add(lecturer);
+        }
+    }
+
+    public void removeLecturer(Lecturer lecturer) {
+        lecturers.remove(lecturer);
+    }
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("name: ").append(name).append("\n");
-    sb.append("numOfLecturers: ").append(numOfLecturers).append("\n");
-    sb.append("lecturers: ");
-    if (lecturers != null && numOfLecturers > 0) {
-        for (int i = 0; i < numOfLecturers; i++) {
-            sb.append(lecturers[i].getName());
-            if (i < numOfLecturers - 1) {
-                sb.append(", ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("name: ").append(name).append("\n");
+        sb.append("numOfLecturers: ").append(getNumOfLecturers()).append("\n");
+        sb.append("lecturers: ");
+        if (lecturers != null && !lecturers.isEmpty()) {
+            for (int i = 0; i < lecturers.size(); i++) {
+                sb.append(lecturers.get(i).getName());
+                if (i < lecturers.size() - 1) {
+                    sb.append(", ");
+                }
             }
+            sb.append("\n");
+        } else {
+            sb.append("null\n");
         }
-        sb.append("\n");
-    } else {
-        sb.append("null\n");
-    }
-    sb.append("--------------------------------------------------");
-    return sb.toString();
+        sb.append("--------------------------------------------------");
+        return sb.toString();
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Department department = (Department) obj;
-        return name.equals(department.name);
+        Department that = (Department) obj;
+        return name.equals(that.name) && lecturers.equals(that.lecturers);
     }
-
 }

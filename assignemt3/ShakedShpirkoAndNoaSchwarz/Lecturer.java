@@ -1,5 +1,7 @@
 package ShakedShpirkoAndNoaSchwarz;
 
+import java.util.ArrayList;
+
 public class Lecturer implements Cloneable{
     public enum DegreeLevel {
         BACHELOR("Bachelor"), 
@@ -17,16 +19,13 @@ public class Lecturer implements Cloneable{
             return displayName;
         }
 
-
         public boolean equals(DegreeLevel other) { // Method
             if (this.displayName.equals(other.displayName)) {
                 return true;
             }
             return false;
         }
-
     }
-
 
     protected DegreeLevel degreeLevel; // Field
     protected String name; 
@@ -34,8 +33,7 @@ public class Lecturer implements Cloneable{
     protected String degreeName;
     protected int salary;
     protected Department department;
-    protected int numOfCommittees; // Number of committees the lecturer is in
-    protected Committee[] committees;
+    protected ArrayList<Committee> committees = new ArrayList<>();
 
     public Lecturer(String name, String id, String degreeName, Lecturer.DegreeLevel degreeLevel, int salary) {
         this.name = name;
@@ -44,6 +42,7 @@ public class Lecturer implements Cloneable{
         this.degreeLevel = degreeLevel;
         this.salary = salary;
         this.department = null;
+        this.committees = new ArrayList<>();
     }
 
     public String getName() {
@@ -95,51 +94,58 @@ public class Lecturer implements Cloneable{
     }
 
     public int getNumOfCommittees() {
-        return numOfCommittees;
+        return committees.size();
     }
 
-    public void setNumOfCommittees(int numOfCommittees) {
-        this.numOfCommittees = numOfCommittees;
-    }
-
-    public Committee[] getCommittees() {
+    public ArrayList<Committee> getCommittees() {
         return committees;
     }
 
-    public void setCommittees(Committee[] committees) {
+    public void setCommittees(ArrayList<Committee> committees) {
         this.committees = committees;
+    }
+
+    public void addCommittee(Committee committee) {
+        if (!committees.contains(committee)) {
+            committees.add(committee);
+        }
+    }
+
+    public void removeCommittee(Committee committee) {
+        committees.remove(committee);
     }
 
     @Override
     protected Lecturer clone() throws CloneNotSupportedException{
-        return (Lecturer) super.clone();
+        Lecturer cloned = (Lecturer) super.clone();
+        cloned.committees = new ArrayList<>(this.committees);
+        return cloned;
     }
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("name: ").append(name).append("\n");
-    sb.append("ID: ").append(id).append("\n");
-    sb.append("degreeName: ").append(degreeName).append("\n");
-    sb.append("degreeLevel: ").append(degreeLevel.getDisplayName()).append("\n");
-    sb.append("salary: ").append(salary).append("\n");
-    sb.append("department: ").append(department != null ? department.getName() : "null").append("\n");
-    sb.append("numOfCommittees: ").append(numOfCommittees).append("\n");
-    sb.append("committees: ");
-    if (committees != null) {
-        for (int i = 0; i < numOfCommittees; i++) {
-            sb.append(committees[i].getName());
-            if (i < numOfCommittees - 1) {
-                sb.append(", ");
+        StringBuilder sb = new StringBuilder();
+        sb.append("name: ").append(name).append("\n");
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("degreeName: ").append(degreeName).append("\n");
+        sb.append("degreeLevel: ").append(degreeLevel.getDisplayName()).append("\n");
+        sb.append("salary: ").append(salary).append("\n");
+        sb.append("department: ").append(department != null ? department.getName() : "null").append("\n");
+        sb.append("numOfCommittees: ").append(getNumOfCommittees()).append("\n");
+        sb.append("committees: ");
+        if (committees != null && !committees.isEmpty()) {
+            for (int i = 0; i < committees.size(); i++) {
+                sb.append(committees.get(i).getName());
+                if (i < committees.size() - 1) {
+                    sb.append(", ");
+                }
             }
+            sb.append("\n");
+        } else {
+            sb.append("null\n");
         }
-        sb.append("\n");
-    } else {
-        sb.append("null\n");
+        return sb.toString();
     }
-    
-    return sb.toString();
-}
 
     @Override
     public boolean equals(Object obj) {
@@ -148,16 +154,9 @@ public class Lecturer implements Cloneable{
         Lecturer other = (Lecturer) obj;
         return this.name.equals(other.name) && this.id.equals(other.id) &&
                 this.degreeName.equals(other.degreeName) && this.degreeLevel.equals(other.degreeLevel) &&
-                this.salary == other.salary && this.department.equals(other.department) &&
-                this.numOfCommittees == other.numOfCommittees && this.committees.equals(other.committees);
+                this.salary == other.salary && 
+                ((this.department == null && other.department == null) || 
+                 (this.department != null && this.department.equals(other.department))) &&
+                this.committees.equals(other.committees);
     }
-    
-    
-
-    
-
-
-
-    
-   
 }
