@@ -68,7 +68,8 @@ public class Main {
         // Noa Schwarz 212840516 & Shaked Shpirko 315142372
         s = new Scanner(System.in);
         System.out.println("Welcome to the system! please enter a college name: ");
-        Main.manager = new Manager(s.nextLine());
+        String collegeName = s.nextLine();
+        Main.manager = new Manager(collegeName);
         run();
         s.close();
     }
