@@ -3,6 +3,7 @@ package ShakedShpirkoAndNoaSchwarz;
 import java.util.Scanner;
 
 import ShakedShpirkoAndNoaSchwarz.Lecturer.DegreeLevel;
+import ShakedShpirkoAndNoaSchwarz.Committee.DegreeType;
 public class Main {
     private static final String[] MENU = {
         "Exit",
@@ -90,8 +91,8 @@ public class Main {
     manager.asignLecturerToDepartment(manager.getLecturerByName("Carol"), manager.getDepartmentByName("Computer Science"));
 
     // Add Committees
-    manager.createCommittee("Research", manager.getLecturerByName("Bob"));
-    manager.createCommittee("Events", manager.getLecturerByName("Carol"));
+    manager.createCommittee("Research", manager.getLecturerByName("Bob"), DegreeType.PHD);
+    manager.createCommittee("Events", manager.getLecturerByName("Carol"), DegreeType.PROFESSOR);
 
     // Assign Lecturers to Committees
     manager.asignLecturerToCommittee(manager.getLecturerByName("Alice"), manager.getCommitteeByName("Research"));
@@ -203,7 +204,19 @@ public class Main {
             manager.isNotExistLecturer(chairName);
             Lecturer chair = manager.getLecturerByName(chairName);
             manager.notDoc(chair);
-            manager.createCommittee(name, chair);
+            System.out.println("Choose committee degree type by number: 1. Bachelor 2. Master 3. PhD 4. Professor");
+            int number = s.nextInt();
+            s.nextLine();
+            DegreeType degreeType;
+            switch (number) {
+                case 1 -> degreeType = DegreeType.BACHELOR;
+                case 2 -> degreeType = DegreeType.MASTER;
+                case 3 -> degreeType = DegreeType.PHD;
+                case 4 -> degreeType = DegreeType.PROFESSOR;
+                default -> {System.out.println("Invalid number"); 
+                return;}
+            }
+            manager.createCommittee(name, chair, degreeType);
             System.out.println("Committee added successfully!");
         }
         catch (CommitteeExistException e) {
@@ -303,7 +316,9 @@ public class Main {
             Lecturer lect = manager.getLecturerByName(lectName);
             manager.isLecturrerInCommittee(lect, commmittee);
             manager.isChairAlreadyChairOfCommittee(lect, commmittee);
+            manager.isLecturerTheSameDegreeType(lect, commmittee);
             manager.asignLecturerToCommittee(lect, commmittee);
+
             System.out.println("Lecturer added to committee successfully!");
         }
         catch (CommitteeNotExistException e) {
@@ -331,6 +346,14 @@ public class Main {
             }
         }
         catch (LecturrerInCommitteeException e){
+            System.out.println(e.getMessage());
+            System.out.println("press 1 to retry or 2 to return to menu");  
+            if (s.nextInt() == 1) {
+                s.nextLine();
+                asignLecturerToCommittee();
+            }
+        }
+        catch(NotSameDegreeTypeException e){
             System.out.println(e.getMessage());
             System.out.println("press 1 to retry or 2 to return to menu");  
             if (s.nextInt() == 1) {

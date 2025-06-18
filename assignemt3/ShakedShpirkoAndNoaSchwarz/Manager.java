@@ -2,6 +2,9 @@ package ShakedShpirkoAndNoaSchwarz;
 
 import java.util.ArrayList;
 
+import ShakedShpirkoAndNoaSchwarz.Lecturer.DegreeLevel;
+import ShakedShpirkoAndNoaSchwarz.Committee.DegreeType;
+
 public class Manager {
     private String collegeName;
     private ArrayList<Lecturer> lecturers;
@@ -83,8 +86,6 @@ public class Manager {
         
     }
    
-    
-
     
 
     public void isExistLecturer(String name) throws LecturrerExistException {
@@ -182,8 +183,8 @@ public class Manager {
         return String.format("Average Salary of Lecturers in Department %s: %.2f", department.getName(), avg);
     }
 
-    public void createCommittee(String name, Lecturer chair){
-        Committee newCommittee = new Committee(name,chair);
+    public void createCommittee(String name, Lecturer chair, DegreeType degreeType){
+        Committee newCommittee = new Committee(name,chair, degreeType);
         committees.add(newCommittee);
     }
 
@@ -280,5 +281,13 @@ public class Manager {
             member.addCommittee(clonedCommittee);
         }
     }
+
+    public void isLecturerTheSameDegreeType(Lecturer lect, Committee commmittee) throws NotSameDegreeTypeException {
+        if (lect.getDegreeLevel().getDisplayName() != commmittee.getDegreeType().getDisplayName()) {
+            throw new IllegalArgumentException("Lecturer " + lect.getName() + " does not match the degree type of committee " + commmittee.getName() + ".");
+        }
+    }
 }
+
+    
 

@@ -6,10 +6,36 @@ public class Committee implements Cloneable {
     private String name;
     private Lecturer chair;
     private ArrayList<Lecturer> members;
+    private DegreeType degreeType;
+    
+    public enum DegreeType {
+        BACHELOR("Bachelor"), 
+        MASTER("Master"), 
+        PHD("PhD"), 
+        PROFESSOR("Professor");
+    
+        private final String displayName;  
+    
+        DegreeType(String displayName) {  // Constructor
+            this.displayName = displayName;
+        }
+    
+        public String getDisplayName() {   // Method
+            return displayName;
+        }
 
-    public Committee(String name, Lecturer chair) {
+        public boolean equals(DegreeType other) { // Method
+            if (this.displayName.equals(other.displayName)) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Committee(String name, Lecturer chair, DegreeType degreeType) {
         this.name = name;
         this.chair = chair;
+        this.degreeType = degreeType;
         this.members = new ArrayList<>();
     }
 
@@ -51,6 +77,10 @@ public class Committee implements Cloneable {
         members.remove(lecturer);
     }
 
+    public DegreeType getDegreeType() {
+        return degreeType;
+    }
+
     
 
     @Override
@@ -66,6 +96,7 @@ public class Committee implements Cloneable {
         StringBuilder sb = new StringBuilder();
         sb.append("name: ").append(name).append("\n");
         sb.append("chair: ").append(chair != null ? chair.getName() : "null").append("\n");
+        sb.append("committee type: ").append(degreeType.getDisplayName()).append("\n");
         sb.append("numOfMembers: ").append(getNumOfMembers()).append("\n");
         sb.append("members: ");
         if (members != null && !members.isEmpty()) {
