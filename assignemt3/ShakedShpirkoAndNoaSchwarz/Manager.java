@@ -7,9 +7,6 @@ public class Manager {
     private ArrayList<Lecturer> lecturers;
     private ArrayList<Department> departments;
     private ArrayList<Committee> committees;
-
-
-    
     
 
     public Manager(String collegeName) {
